@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, Trash2, HelpCircle, Loader2 } from "lucide-react";
+import { Plus, Trash2, LifeBuoy, LoaderCircle } from "lucide-react";
 import { createJob } from "../services/jobsServices";
 
 export default function CreateGig() {
@@ -259,7 +259,7 @@ export default function CreateGig() {
                 <div className="flex items-center gap-2">
                   <h3 className="text-lg font-bold text-slate-900">Project Milestones</h3>
                   <div className="group relative">
-                    <HelpCircle className="text-slate-400 cursor-pointer" size={16} />
+                    <LifeBuoy className="text-slate-400 cursor-pointer" size={16} />
                     <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-64 p-2 bg-slate-800 text-white text-xs rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity shadow-lg">
                       Split your project into manageable phases. The total budget must be fully allocated to milestones.
                     </span>
@@ -332,7 +332,7 @@ export default function CreateGig() {
             >
               {loading ? (
                 <>
-                  <Loader2 className="animate-spin" size={18} />
+                  <LoaderCircle className="animate-spin" size={18} />
                   Posting...
                 </>
               ) : (

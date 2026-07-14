@@ -21,7 +21,7 @@ import {
   Smile,
   WifiOff,
   AlertCircle,
-  Loader2,
+  LoaderCircle,
   Check,
   CheckCheck,
 } from "lucide-react";
@@ -97,6 +97,8 @@ export default function RealTimeChat() {
   const messagesContainerRef = useRef(null);
   const typingTimerRef = useRef(null);
   const fileInputRef = useRef(null);
+  // Holds the pagination cursor without making loadHistory re-create on every change.
+  const nextCursorRef = useRef(null);
 
   // Pick the conversation to open (from nav state or first in list)
   useEffect(() => {
@@ -124,7 +126,7 @@ export default function RealTimeChat() {
         if (older) setLoadingOlder(true);
         else setLoadingHistory(true);
 
-        const cursor = older ? nextCursor : null;
+        const cursor = older ? nextCursorRef.current : null;
         const data = await chatServices.getChatHistory(
           conversationId,
           cursor,
@@ -133,6 +135,7 @@ export default function RealTimeChat() {
 
         const incoming = data.messages || [];
         setMessages((prev) => (older ? [...incoming, ...prev] : incoming));
+        nextCursorRef.current = data.nextCursor;
         setNextCursor(data.nextCursor);
         setHasMore(data.hasMore);
         setError(null);
@@ -144,7 +147,7 @@ export default function RealTimeChat() {
         else setLoadingHistory(false);
       }
     },
-    [nextCursor],
+    [],
   );
 
   // Reset + load when conversation changes
@@ -152,6 +155,7 @@ export default function RealTimeChat() {
     if (!selectedConvId) return;
     setMessages([]);
     setNextCursor(null);
+    nextCursorRef.current = null;
     setHasMore(true);
     setError(null);
     loadHistory(selectedConvId, { older: false });
@@ -500,7 +504,7 @@ export default function RealTimeChat() {
             >
               {loadingHistory ? (
                 <div className="chat-loading">
-                  <Loader2 className="animate-spin" size={28} />
+                  <LoaderCircle className="animate-spin" size={28} />
                 </div>
               ) : error && messages.length === 0 ? (
                 <div className="chat-error-state">
@@ -520,7 +524,7 @@ export default function RealTimeChat() {
                 <>
                   {loadingOlder && (
                     <div className="chat-loading-older">
-                      <Loader2 className="animate-spin" size={18} />
+                      <LoaderCircle className="animate-spin" size={18} />
                     </div>
                   )}
                   {!hasMore && (

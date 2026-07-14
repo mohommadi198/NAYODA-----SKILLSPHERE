@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link , useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Lock, User, Eye, EyeOff, Loader2 } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { useAuth } from "../Context/AuthContext";
 
 import { syncUser } from "../services/userServices";
@@ -262,7 +262,7 @@ const Signup = () => {
               className="w-full flex items-center justify-center py-3 px-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary/90 focus:ring-4 focus:ring-primary/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary/20 mt-6"
             >
               {loading ? (
-                <Loader2 className="animate-spin mr-2" size={20} />
+                <LoaderCircle className="animate-spin mr-2" size={20} />
               ) : (
                 "Create Account"
               )}
@@ -284,7 +284,7 @@ const Signup = () => {
             className="w-full flex items-center justify-center py-2.5 px-4 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-all font-medium shadow-sm"
           >
             {googleLoading ? (
-              <Loader2 className="animate-spin mr-2" size={20} />
+              <LoaderCircle className="animate-spin mr-2" size={20} />
             ) : (
               <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
                 <path

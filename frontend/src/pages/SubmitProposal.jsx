@@ -7,7 +7,7 @@ import {
   ArrowLeft,
   Plus,
   Trash2,
-  Loader2,
+  LoaderCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -245,7 +245,7 @@ export default function SubmitProposal() {
               disabled={loading}
               className="flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 font-semibold text-white shadow-lg shadow-blue-200 transition hover:bg-blue-700 disabled:opacity-70"
             >
-              {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
+              {loading ? <LoaderCircle className="animate-spin" size={18} /> : <Send size={18} />}
               {loading ? "Sending..." : "Send Proposal"}
             </button>
           </div>

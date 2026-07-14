@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useChat } from "../Context/ChatContext";
 import { useAuth } from "../Context/AuthContext";
-import { MessageCircle, Loader2 } from "lucide-react";
+import { MessageCircle, LoaderCircle } from "lucide-react";
 
 /**
  * Reusable button that starts (or resumes) a conversation with a user.
@@ -82,7 +82,7 @@ export default function MessageButton({
       {...ariaProps}
     >
       {loading ? (
-        <Loader2 size={16} className="animate-spin" />
+        <LoaderCircle size={16} className="animate-spin" />
       ) : (
         <MessageCircle size={16} />
       )}

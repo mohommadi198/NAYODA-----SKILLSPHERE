@@ -1,213 +1,333 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../Context/AuthContext";
-import { Link, useSearchParams } from "react-router-dom";
-import MessageButton from "../components/MessageButton";
-import { getUserById } from "../services/userServices";
+import { useChat } from "../Context/ChatContext";
+import { getUserById, updateProfile as updateProfileApi } from "../services/userServices";
+import chatServices from "../services/chatServices";
 
+import ProfileSkeleton from "../components/profile/ProfileSkeleton";
+import EmptyState from "../components/profile/EmptyState";
+import FreelancerProfile from "../components/profile/FreelancerProfile";
+import ClientProfile from "../components/profile/ClientProfile";
+import EditProfileModal from "../components/profile/EditProfileModal";
+import { normalizeProfile, isValidObjectId, computeProfileCompletion, toApiPayload } from "../components/profile/profileUtils";
+import { mockProfiles, mockClientJobs } from "../data/mockProfiles";
+
+/**
+ * Profile page.
+ *
+ * Status state machine:
+ *   - "loading"   → skeleton
+ *   - "success"   → role-based profile (Freelancer | Client)
+ *   - "not_found" → empty state (missing / invalid id)
+ *   - "error"     → empty state with retry (network / server failure)
+ *   - "no_role"   → gentle prompt to pick a role (own profile only)
+ *
+ * Preview mode: `/profile?demo=freelancer` or `/profile?demo=client` renders
+ * mock data without hitting the API (handy for design review).
+ */
 function Profile() {
-  const { dbUser, logout } = useAuth();
+  const { dbUser } = useAuth();
+  const { onlineUsers } = useChat();
   const [searchParams] = useSearchParams();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const viewingUserId = searchParams.get("userId");
+  const demo = searchParams.get("demo"); // "freelancer" | "client"
 
+  const [status, setStatus] = useState("loading");
+  const [rawUser, setRawUser] = useState(null);
+  const [editedProfile, setEditedProfile] = useState(null); // local optimistic copy
+  const [editOpen, setEditOpen] = useState(false);
+  const [editSection, setEditSection] = useState("basics");
+  const [toast, setToast] = useState(null);
+  const [retryNonce, setRetryNonce] = useState(0);
+
+  const statusRef = useRef(status);
+  const setStatusSafe = useCallback((next) => {
+    statusRef.current = next;
+    setStatus(next);
+  }, []);
+  const lastLoadedIdRef = useRef(null);
+
+  const profile = useMemo(
+    () => normalizeProfile(editedProfile || rawUser),
+    [editedProfile, rawUser]
+  );
+
+  const isOwnProfile = useMemo(
+    () => Boolean(profile && dbUser && String(profile.id) === String(dbUser._id)),
+    [profile, dbUser]
+  );
+
+  const completion = useMemo(() => computeProfileCompletion(profile), [profile]);
+
+  const online = useMemo(() => {
+    if (!profile) return false;
+    if (isOwnProfile) return true;
+    return Boolean(onlineUsers?.[profile.id]);
+  }, [profile, isOwnProfile, onlineUsers]);
+
+  const showToast = useCallback((msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 2200);
+  }, []);
+
+  // ── Data loading ───────────────────────────────────────────────────────
   useEffect(() => {
-    const load = async () => {
-      // Viewing another user's public profile
-      if (viewingUserId && viewingUserId !== dbUser?._id) {
-        setLoading(true);
-        try {
-          const res = await getUserById?.(viewingUserId);
-          setUser(res?.data || res || null);
-        } catch (err) {
-          console.error("Failed to load user profile", err);
-          setUser(null);
-        } finally {
-          setLoading(false);
-        }
-      } else if (dbUser) {
-        setUser(dbUser);
+    let cancelled = false;
+
+    // Demo preview (no API call).
+    if (demo === "freelancer" || demo === "client") {
+      lastLoadedIdRef.current = `demo-${demo}`;
+      setRawUser(mockProfiles[demo]);
+      setStatusSafe("success");
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    const isSelf = !viewingUserId || (dbUser && viewingUserId === dbUser._id);
+
+    // Own profile — wait for auth, then use dbUser.
+    if (isSelf) {
+      if (dbUser === undefined) {
+        setStatusSafe("loading");
+        return () => {
+          cancelled = true;
+        };
       }
+      if (!dbUser) {
+        setRawUser(null);
+        setStatusSafe("not_found");
+        return () => {
+          cancelled = true;
+        };
+      }
+      lastLoadedIdRef.current = dbUser._id;
+      setRawUser(dbUser);
+      setStatusSafe("success");
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    // Another user — validate id, then fetch.
+    if (!isValidObjectId(viewingUserId)) {
+      setRawUser(null);
+      setStatusSafe("not_found");
+      return () => {
+        cancelled = true;
+      };
+    }
+    if (lastLoadedIdRef.current === viewingUserId && statusRef.current === "success") {
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    lastLoadedIdRef.current = viewingUserId;
+    setStatusSafe("loading");
+
+    getUserById(viewingUserId)
+      .then((res) => {
+        if (cancelled) return;
+        const data = res?.data ?? res;
+        if (!data) {
+          setRawUser(null);
+          setStatusSafe("not_found");
+          return;
+        }
+        setRawUser(data);
+        setStatusSafe("success");
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        const code = err?.response?.status;
+        setRawUser(null);
+        setStatusSafe(code === 404 ? "not_found" : "error");
+      });
+
+    return () => {
+      cancelled = true;
     };
-    load();
-  }, [viewingUserId, dbUser]);
+  }, [viewingUserId, demo, dbUser, retryNonce, setStatusSafe]);
 
-  const handleLogout = () => {
-    if (logout) logout();
-  };
+  // ── Handlers ───────────────────────────────────────────────────────────
+  const handleEdit = useCallback((section = "basics") => {
+    setEditSection(section);
+    setEditOpen(true);
+  }, []);
 
-  const isOwnProfile =
-    !viewingUserId || viewingUserId === dbUser?._id;
+  const handleShare = useCallback(() => {
+    const url =
+      isOwnProfile && profile?.id
+        ? `${window.location.origin}/profile?userId=${profile.id}`
+        : window.location.href;
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(url).then(
+        () => showToast("Profile link copied!"),
+        () => showToast("Couldn't copy link")
+      );
+    } else {
+      showToast("Profile link copied!");
+    }
+  }, [isOwnProfile, profile, showToast]);
 
-  if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-gray-500">Loading profile...</p>
-      </div>
-    );
-  }
+  const handleMessage = useCallback(async () => {
+    if (!profile?.id) return;
+    try {
+      await chatServices.createOrGetConversation(profile.id);
+      navigate("/chat");
+    } catch {
+      navigate("/chat");
+    }
+  }, [profile, navigate]);
 
-  if (!user) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-gray-500">Profile not found.</p>
-      </div>
-    );
-  }
+  const handleHire = useCallback(() => {
+    // Hiring starts with a conversation in this MVP.
+    handleMessage();
+  }, [handleMessage]);
 
+  const handleDownloadResume = useCallback(() => {
+    if (!profile) return;
+    const lines = [
+      profile.name,
+      profile.freelancer?.headline || profile.client?.company || "",
+      profile.location || "",
+      "—",
+      profile.bio || "",
+      "—",
+      "Skills: " + (profile.freelancer?.skills || []).join(", "),
+      "Experience: " + (profile.freelancer?.experience || []).map((e) => `${e.title} @ ${e.company}`).join("; "),
+    ].join("\n");
+    const blob = new Blob([lines], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${profile.name.replace(/\s+/g, "_")}_profile.txt`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast("Resume downloaded");
+  }, [profile, showToast]);
+
+  const handleSave = useCallback(
+    async (updated) => {
+      // Optimistic local update.
+      setEditedProfile(updated);
+      if (isOwnProfile) {
+        try {
+          await updateProfileApi(toApiPayload(updated));
+          showToast("Profile updated");
+        } catch (err) {
+          console.error("Update failed", err);
+          showToast("Saved locally — sync pending");
+        }
+      }
+    },
+    [isOwnProfile, showToast]
+  );
+
+  // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-slate-100 py-10">
-      <div className="mx-auto max-w-5xl px-4">
-        {/* Profile Card */}
-        <div className="overflow-hidden rounded-3xl bg-white shadow-lg">
-          {/* Cover */}
-          <div className="h-44 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"></div>
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-white to-indigo-50/40">
+      {/* Decorative gradient blobs for the glassmorphism backdrop */}
+      <div className="pointer-events-none absolute -left-24 -top-32 h-96 w-96 rounded-full bg-indigo-300/40 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-24 top-1/3 h-96 w-96 rounded-full bg-fuchsia-300/30 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-sky-300/30 blur-3xl" aria-hidden="true" />
 
-          {/* Content */}
-          <div className="relative px-8 pb-8">
-            {/* Avatar */}
-            <div className="-mt-16">
-              <img
-                src={
-                  user.profileImage ||
-                  `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                    user.name,
-                  )}`
-                }
-                alt={user.name}
-                className="h-32 w-32 rounded-full border-4 border-white object-cover shadow-lg"
-              />
-            </div>
+      {status === "loading" && <ProfileSkeleton />}
 
-            <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:justify-between">
-              {/* Left */}
-              <div>
-                <h1 className="text-3xl font-bold text-slate-800">
-                  {user.name}
-                </h1>
+      {status === "not_found" && (
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-12">
+          <EmptyState variant="not_found" onBack={() => navigate(-1)} />
+        </div>
+      )}
 
-                <p className="mt-1 capitalize text-blue-600">{user.role}</p>
+      {status === "error" && (
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-12">
+          <EmptyState variant="error" onRetry={() => { lastLoadedIdRef.current = null; setRetryNonce((n) => n + 1); }} />
+        </div>
+      )}
 
-                <p className="mt-2 text-gray-500">📧 {user.email}</p>
+      {status === "success" && profile && (profile.role === "freelancer" || profile.role === "client") && (
+        profile.role === "freelancer" ? (
+          <FreelancerProfile
+            profile={profile}
+            isOwnProfile={isOwnProfile}
+            online={online}
+            onEdit={handleEdit}
+            onShare={handleShare}
+            onMessage={handleMessage}
+            onHire={handleHire}
+            onDownloadResume={handleDownloadResume}
+            completion={completion}
+          />
+        ) : (
+          <ClientProfile
+            profile={profile}
+            isOwnProfile={isOwnProfile}
+            online={online}
+            onEdit={handleEdit}
+            onShare={handleShare}
+            onMessage={handleMessage}
+            onDownloadResume={handleDownloadResume}
+            completion={completion}
+            jobs={mockClientJobs}
+          />
+        )
+      )}
 
-                <p className="mt-2 text-gray-500">
-                  📍 {user.location || "Location not specified"}
-                </p>
-              </div>
-
-              {/* Right */}
-              <div className="rounded-2xl bg-slate-50 p-6 text-center shadow-sm">
-                <div className="text-sm text-gray-500">Hourly Rate</div>
-
-                <div className="mt-2 text-4xl font-bold text-blue-600">
-                  ₹{user.rate || 0}
-                </div>
-
-                <div className="text-gray-500">per hour</div>
-
-                {!isOwnProfile && (
-                  <div className="mt-5 flex justify-center">
-                    <MessageButton
-                      recipientId={user._id}
-                      className="w-full justify-center"
-                      label="Message"
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Bio */}
-            <div className="mt-10">
-              <h2 className="mb-3 text-xl font-semibold">About</h2>
-
-              <p className="leading-7 text-gray-600">
-                {user.bio || "No bio added yet."}
-              </p>
-            </div>
-
-            {/* Skills */}
-            <div className="mt-10">
-              <h2 className="mb-3 text-xl font-semibold">Skills</h2>
-
-              <div className="flex flex-wrap gap-3">
-                {user.skills?.length ? (
-                  user.skills.map((skill, index) => (
-                    <span
-                      key={index}
-                      className="rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700"
-                    >
-                      {skill}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-gray-500">No skills added.</span>
-                )}
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="mt-10">
-              <h2 className="mb-3 text-xl font-semibold">Social Links</h2>
-
-              <div className="flex flex-wrap gap-4">
-                {user.socialLinks?.github && (
-                  <a
-                    href={user.socialLinks.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-lg border px-4 py-2 hover:bg-gray-100"
-                  >
-                    GitHub
-                  </a>
-                )}
-
-                {user.socialLinks?.linkedin && (
-                  <a
-                    href={user.socialLinks.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-lg border px-4 py-2 hover:bg-gray-100"
-                  >
-                    LinkedIn
-                  </a>
-                )}
-
-                {user.socialLinks?.twitter && (
-                  <a
-                    href={user.socialLinks.twitter}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-lg border px-4 py-2 hover:bg-gray-100"
-                  >
-                    Twitter
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {/* Edit Button */}
-            <div className="mt-12 flex justify-space" style={{ gap : 20 }}>
-              <Link
-                to={"/edit-profile"}
-                className="rounded-xl bg-blue-600 px-8 py-3 font-semibold text-white transition hover:bg-blue-700"
-              >
-                {" "}
-                Edit Profile
-              </Link>
-
-              <Link
-                onClick={handleLogout}
-                className="rounded-xl bg-red-600 px-8 py-3 font-semibold text-white transition hover:bg-red-700"
-              >
-                Logout
-              </Link>
-            </div>
+      {/* Own profile with no role chosen yet */}
+      {status === "success" && profile && !profile.role && (
+        <div className="relative z-10 mx-auto mt-24 max-w-xl px-4">
+          <div className="rounded-3xl border border-white/60 bg-white/70 p-10 text-center shadow-xl shadow-indigo-100/50 backdrop-blur-xl">
+            <h2 className="text-xl font-bold text-slate-900">Finish setting up your profile</h2>
+            <p className="mt-2 text-sm text-slate-500">
+              Choose how you'll use SkillSphere to unlock your personalized profile.
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/choose-role")}
+              className="mt-6 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-200 transition hover:shadow-indigo-300"
+            >
+              Choose a role
+            </button>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+
+      {/* Edit modal (owner only) */}
+      {isOwnProfile && profile && (
+        <EditProfileModal
+          open={editOpen}
+          onClose={() => setEditOpen(false)}
+          profile={profile}
+          initialSection={editSection}
+          onSave={handleSave}
+        />
+      )}
+
+      {/* Toast */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-6 left-1/2 z-[120] -translate-x-1/2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-xl"
+          >
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
   );
 }
 

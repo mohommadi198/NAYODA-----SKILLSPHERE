@@ -7,7 +7,7 @@ import {
   Smile,
   WifiOff,
   AlertCircle,
-  Loader2,
+  LoaderCircle,
   Check,
   CheckCheck,
 } from "lucide-react";
@@ -64,7 +64,7 @@ export default function MessageBubble({ msg, dbUser }) {
             ) : showRead ? (
               <CheckCheck size={13} className="read-receipt" />
             ) : pending ? (
-              <Loader2 size={12} className="animate-spin" />
+              <LoaderCircle size={12} className="animate-spin" />
             ) : (
               <Check size={13} />
             ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Home.css";
-import { AdIcon, Pen, Settings } from "lucide-react";
+import { Ad, Pen, Settings } from "lucide-react";
 import { FaThinkPeaks } from "react-icons/fa";
 import CategoryCard from "../components/CategoryCard";
 import { Link } from "react-router-dom";
@@ -37,12 +37,12 @@ function Home() {
       description: "SEO, ads, and social media experts",
       freelancersCount: "19,800+",
       tags: ["SEO", "PPC", "Social", "Email"],
-      icon: <AdIcon />,
+      icon: <Ad />,
     },
   ];
 
   return (
-    <main className="pt-16">
+    <main className="">
       <h2 className="sr-only">
         FreelanceHub – Find the perfect freelancer for any project
       </h2>

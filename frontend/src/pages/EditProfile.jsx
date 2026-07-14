@@ -3,7 +3,7 @@ import { updateProfile } from "../services/userServices";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { isFreelancer, isClient } from "../utils/roles";
-import { Plus, Trash2, Loader2 } from "lucide-react";
+import { Plus, Trash2, LoaderCircle } from "lucide-react";
 
 function EditProfile() {
   const { dbUser, refreshProfile } = useAuth();
@@ -447,7 +447,7 @@ function EditProfile() {
             >
               {saving ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 size={16} className="animate-spin" /> Saving…
+                  <LoaderCircle size={16} className="animate-spin" /> Saving…
                 </span>
               ) : (
                 "Save Changes"
