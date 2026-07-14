@@ -1,0 +1,281 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+  background-color: #f8f9ff;
+  color: #111827;
+}
+
+/* Mobile-first base styles */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(70, 72, 212, 0.06),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(0, 40, 142, 0.04),
+      transparent 40%
+    );
+}
+
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px;
+  position: relative;
+}
+
+.ambient {
+  display: none;    /*decorative: enabled on larger screens */
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.glass-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(2, 8, 23, 0.06);
+  z-index: 1;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: rgba(0, 40, 142, 0.06);
+  font-size: 20px;
+  color: #00288e;
+}
+
+.login-header h1 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.login-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #00288e;
+}
+
+.input-wrapper,
+.password-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #757684;
+  font-size: 16px;
+}
+
+.input-wrapper input,
+.password-wrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 44px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #757684;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.remember {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(180deg, #00288e, #1e40af);
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #eee;
+  top: 50%;
+  left: 0;
+}
+
+.divider span {
+  background: transparent;
+  padding: 0 12px;
+  position: relative;
+  display: inline-block;
+  background-color: #f8f9ff;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+}
+
+.signup-text {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.signup-text a {
+  color: #00288e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signin-btn,
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Larger screens */
+@media (min-width: 769px) {
+  .login-container {
+    padding: 24px;
+  }
+  .glass-card {
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+  }
+  .login-header {
+    margin-bottom: 30px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+  .logo-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    border-radius: 16px;
+    background: rgba(0, 40, 142, 0.08);
+  }
+  .login-header h1 {
+    font-size: 30px;
+  }
+  .login-header p {
+    font-size: 15px;
+  }
+  .ambient {
+    display: block;
+  }
+  .ambient-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 40, 142, 0.08);
+    left: 10%;
+    top: 20%;
+  }
+  .ambient-2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(70, 72, 212, 0.08);
+    right: 10%;
+    bottom: 10%;
+  }
+  .divider::before {
+    background: #ddd;
+  }
+  .signin-btn:hover {
+    transform: translateY(-2px);
+  }
+}

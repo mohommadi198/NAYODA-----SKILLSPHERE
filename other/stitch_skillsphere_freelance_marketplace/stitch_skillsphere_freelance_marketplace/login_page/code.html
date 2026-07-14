@@ -1,0 +1,473 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sign In | SkillSphere</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#fffbff",
+              "on-secondary-fixed": "#07006c",
+              "surface-container-low": "#eff4ff",
+              tertiary: "#003853",
+              "tertiary-fixed": "#c9e6ff",
+              "on-error-container": "#93000a",
+              "surface-container-high": "#dce9ff",
+              "on-primary-fixed-variant": "#173bab",
+              "surface-container": "#e5eeff",
+              "inverse-on-surface": "#eaf1ff",
+              "surface-bright": "#f8f9ff",
+              background: "#f8f9ff",
+              "on-tertiary-fixed": "#001e2f",
+              "error-container": "#ffdad6",
+              "on-tertiary": "#ffffff",
+              "on-background": "#0b1c30",
+              surface: "#f8f9ff",
+              "outline-variant": "#c4c5d5",
+              "inverse-surface": "#213145",
+              "surface-dim": "#cbdbf5",
+              "surface-container-lowest": "#ffffff",
+              error: "#ba1a1a",
+              primary: "#00288e",
+              secondary: "#4648d4",
+              "secondary-fixed-dim": "#c0c1ff",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-surface-variant": "#444653",
+              "primary-fixed": "#dde1ff",
+              "surface-tint": "#3755c3",
+              outline: "#757684",
+              "tertiary-container": "#005074",
+              "on-tertiary-fixed-variant": "#004c6e",
+              "surface-container-highest": "#d3e4fe",
+              "on-primary-fixed": "#001453",
+              "primary-fixed-dim": "#b8c4ff",
+              "tertiary-fixed-dim": "#89ceff",
+              "on-secondary-fixed-variant": "#2f2ebe",
+              "secondary-container": "#6063ee",
+              "primary-container": "#1e40af",
+              "on-primary-container": "#a8b8ff",
+              "on-tertiary-container": "#68c4ff",
+              "inverse-primary": "#b8c4ff",
+              "on-surface": "#0b1c30",
+              "on-error": "#ffffff",
+              "surface-variant": "#d3e4fe",
+              "secondary-fixed": "#e1e0ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              md: "24px",
+              base: "8px",
+              xs: "4px",
+              xl: "64px",
+              gutter: "24px",
+              sm: "12px",
+              lg: "40px",
+              "container-max": "1280px",
+            },
+            fontFamily: {
+              "display-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "body-md": ["Inter"],
+              "label-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "display-lg-mobile": ["Inter"],
+            },
+            fontSize: {
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": [
+                "16px",
+                {
+                  lineHeight: "24px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "label-sm": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(226, 232, 240, 0.5);
+      }
+      .mesh-gradient {
+        background-color: #f8f9ff;
+        background-image:
+          radial-gradient(
+            at 0% 0%,
+            rgba(70, 72, 212, 0.1) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 100% 0%,
+            rgba(0, 40, 142, 0.08) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 100% 100%,
+            rgba(60, 99, 238, 0.12) 0px,
+            transparent 50%
+          ),
+          radial-gradient(
+            at 0% 100%,
+            rgba(0, 80, 116, 0.05) 0px,
+            transparent 50%
+          );
+      }
+      .input-focus-ring:focus {
+        box-shadow: 0 0 0 4px rgba(0, 40, 142, 0.1);
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="bg-background min-h-screen flex flex-col mesh-gradient">
+    <!-- Top Navigation (Shell suppressed for transactional flow, but keeping minimalist brand presence) -->
+    <header
+      class="fixed top-0 w-full z-50 flex justify-between items-center h-16 px-6 md:px-10"
+    >
+      <div
+        class="text-headline-md font-headline-md font-bold tracking-tight text-primary"
+      >
+        SkillSphere
+      </div>
+      <div class="hidden md:flex gap-base">
+        <button
+          class="px-md py-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-primary/5 transition-colors"
+        >
+          Help Center
+        </button>
+      </div>
+    </header>
+    <main
+      class="flex-grow flex items-center justify-center p-gutter relative overflow-hidden"
+    >
+      <!-- Decorative Ambient Elements -->
+      <div
+        class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10 animate-pulse"
+      ></div>
+      <div
+        class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -z-10"
+      ></div>
+      <!-- Login Card -->
+      <div
+        class="glass-card w-full max-w-md p-lg rounded-xl shadow-md space-y-lg"
+      >
+        <!-- Logo & Heading -->
+        <div class="text-center space-y-xs">
+          <div
+            class="inline-flex items-center justify-center p-sm bg-primary/5 rounded-xl mb-base"
+          >
+            <span
+              class="material-symbols-outlined text-primary text-4xl"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >hub</span
+            >
+          </div>
+          <h1 class="font-headline-md text-headline-md text-on-background">
+            Welcome back
+          </h1>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Log in to your freelancer portal
+          </p>
+        </div>
+        <!-- Form -->
+        <form class="space-y-base" id="loginForm">
+          <div class="space-y-xs">
+            <label
+              class="font-label-sm text-label-sm text-on-surface block px-xs"
+              for="email"
+              >Email Address</label
+            >
+            <div class="relative group">
+              <div
+                class="absolute inset-y-0 left-0 pl-base flex items-center pointer-events-none text-outline"
+              >
+                <span class="material-symbols-outlined text-body-md">mail</span>
+              </div>
+              <input
+                class="block w-full pl-lg pr-md py-sm bg-surface-container-lowest border border-outline-variant/50 rounded-lg font-body-md text-body-md text-on-surface placeholder-outline focus:outline-none focus:border-primary input-focus-ring transition-all"
+                id="email"
+                placeholder="name@company.com"
+                required=""
+                type="email"
+              />
+            </div>
+          </div>
+          <div class="space-y-xs">
+            <label
+              class="font-label-sm text-label-sm text-on-surface block px-xs"
+              for="password"
+              >Password</label
+            >
+            <div class="relative group">
+              <div
+                class="absolute inset-y-0 left-0 pl-base flex items-center pointer-events-none text-outline"
+              >
+                <span class="material-symbols-outlined text-body-md">lock</span>
+              </div>
+              <input
+                class="block w-full pl-lg pr-lg py-sm bg-surface-container-lowest border border-outline-variant/50 rounded-lg font-body-md text-body-md text-on-surface placeholder-outline focus:outline-none focus:border-primary input-focus-ring transition-all"
+                id="password"
+                placeholder="••••••••"
+                required=""
+                type="password"
+              />
+              <button
+                class="absolute inset-y-0 right-0 pr-base flex items-center text-outline hover:text-primary transition-colors"
+                id="togglePassword"
+                type="button"
+              >
+                <span
+                  class="material-symbols-outlined text-body-md"
+                  id="eyeIcon"
+                  >visibility</span
+                >
+              </button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between py-xs">
+            <div class="flex items-center">
+              <input
+                class="h-4 w-4 text-primary focus:ring-primary/20 border-outline-variant rounded"
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+              />
+              <label
+                class="ml-2 block font-label-sm text-label-sm text-on-surface-variant"
+                for="remember-me"
+              >
+                Remember me
+              </label>
+            </div>
+            <div class="text-label-sm">
+              <a
+                class="font-label-sm font-medium text-primary hover:text-secondary-container transition-colors"
+                href="#"
+              >
+                Forgot password?
+              </a>
+            </div>
+          </div>
+          <button
+            class="w-full flex justify-center items-center py-sm px-base border border-transparent rounded-lg shadow-sm font-label-sm text-on-primary bg-primary bg-gradient-to-b from-primary to-primary-container hover:shadow-md active:scale-[0.98] transition-all duration-150"
+            type="submit"
+          >
+            Sign In
+            <span class="material-symbols-outlined ml-xs text-body-md"
+              >arrow_forward</span
+            >
+          </button>
+        </form>
+        <!-- Divider -->
+        <div class="relative">
+          <div aria-hidden="true" class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-outline-variant/30"></div>
+          </div>
+          <div class="relative flex justify-center text-label-sm">
+            <span
+              class="px-base bg-surface-container-lowest text-on-surface-variant"
+              >Or continue with</span
+            >
+          </div>
+        </div>
+        <!-- Social Login -->
+        <div class="grid grid-cols-1 gap-base">
+          <button
+            class="w-full inline-flex justify-center items-center py-sm px-md border border-outline-variant/50 rounded-lg bg-surface-container-lowest font-label-sm text-on-surface hover:bg-surface-container-high transition-all active:scale-[0.98]"
+            type="button"
+          >
+            <svg
+              class="h-5 w-5 mr-base"
+              viewbox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4"
+              ></path>
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853"
+              ></path>
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+                fill="#FBBC05"
+              ></path>
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z"
+                fill="#EA4335"
+              ></path>
+            </svg>
+            Google
+          </button>
+        </div>
+        <!-- Footer Link -->
+        <p
+          class="text-center font-body-md text-body-md text-on-surface-variant"
+        >
+          Don't have an account?
+          <a
+            class="font-semibold text-primary hover:text-secondary-container transition-all"
+            href="#"
+            >Sign Up</a
+          >
+        </p>
+      </div>
+    </main>
+
+    
+    <!-- Global Footer -->
+    <footer class="w-full py-md mt-auto bg-transparent">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-base"
+      >
+        <p class="font-label-sm text-label-sm text-on-surface-variant">
+          © 2024 SkillSphere Ecosystem. All rights reserved.
+        </p>
+        <div class="flex gap-md">
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all"
+            href="#"
+            >Terms of Service</a
+          >
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all"
+            href="#"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </footer>
+
+
+    <script>
+      // Password Visibility Toggle
+      const togglePassword = document.querySelector("#togglePassword");
+      const password = document.querySelector("#password");
+      const eyeIcon = document.querySelector("#eyeIcon");
+
+      togglePassword.addEventListener("click", function (e) {
+        const type =
+          password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        eyeIcon.textContent =
+          type === "password" ? "visibility" : "visibility_off";
+      });
+
+      // Form Submission Intercept
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Signing In...
+            `;
+        btn.disabled = true;
+
+        // Mock delay
+        setTimeout(() => {
+          alert(
+            "Authentication service is initializing. Check console for mock data.",
+          );
+          btn.innerHTML =
+            'Sign In <span class="material-symbols-outlined ml-xs text-body-md">arrow_forward</span>';
+          btn.disabled = false;
+        }, 1500);
+      });
+
+      // Subtle Mouse Move Background Shift
+      document.addEventListener("mousemove", (e) => {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+
+        document.body.style.backgroundPosition = `${mouseX * 20}px ${mouseY * 20}px`;
+      });
+    </script>
+  </body>
+</html>

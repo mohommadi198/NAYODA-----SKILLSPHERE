@@ -1,0 +1,823 @@
+<!doctype html>
+
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Freelancer Profile | SkillSphere</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind Config Verbatim -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#fffbff",
+              "on-secondary-fixed": "#07006c",
+              "surface-container-low": "#eff4ff",
+              tertiary: "#003853",
+              "tertiary-fixed": "#c9e6ff",
+              "on-error-container": "#93000a",
+              "surface-container-high": "#dce9ff",
+              "on-primary-fixed-variant": "#173bab",
+              "surface-container": "#e5eeff",
+              "inverse-on-surface": "#eaf1ff",
+              "surface-bright": "#f8f9ff",
+              background: "#f8f9ff",
+              "on-tertiary-fixed": "#001e2f",
+              "error-container": "#ffdad6",
+              "on-tertiary": "#ffffff",
+              "on-background": "#0b1c30",
+              surface: "#f8f9ff",
+              "outline-variant": "#c4c5d5",
+              "inverse-surface": "#213145",
+              "surface-dim": "#cbdbf5",
+              "surface-container-lowest": "#ffffff",
+              error: "#ba1a1a",
+              primary: "#00288e",
+              secondary: "#4648d4",
+              "secondary-fixed-dim": "#c0c1ff",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-surface-variant": "#444653",
+              "primary-fixed": "#dde1ff",
+              "surface-tint": "#3755c3",
+              outline: "#757684",
+              "tertiary-container": "#005074",
+              "on-tertiary-fixed-variant": "#004c6e",
+              "surface-container-highest": "#d3e4fe",
+              "on-primary-fixed": "#001453",
+              "primary-fixed-dim": "#b8c4ff",
+              "tertiary-fixed-dim": "#89ceff",
+              "on-secondary-fixed-variant": "#2f2ebe",
+              "secondary-container": "#6063ee",
+              "primary-container": "#1e40af",
+              "on-primary-container": "#a8b8ff",
+              "on-tertiary-container": "#68c4ff",
+              "inverse-primary": "#b8c4ff",
+              "on-surface": "#0b1c30",
+              "on-error": "#ffffff",
+              "surface-variant": "#d3e4fe",
+              "secondary-fixed": "#e1e0ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              md: "24px",
+              base: "8px",
+              xs: "4px",
+              xl: "64px",
+              gutter: "24px",
+              sm: "12px",
+              lg: "40px",
+              "container-max": "1280px",
+            },
+            fontFamily: {
+              "display-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "body-md": ["Inter"],
+              "label-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "display-lg-mobile": ["Inter"],
+            },
+            fontSize: {
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": [
+                "16px",
+                {
+                  lineHeight: "24px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "label-sm": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(226, 232, 240, 0.5);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .masonry-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-auto-rows: 10px;
+      }
+      .masonry-item-sm {
+        grid-row-end: span 20;
+      }
+      .masonry-item-md {
+        grid-row-end: span 30;
+      }
+      .masonry-item-lg {
+        grid-row-end: span 40;
+      }
+
+      .proficiency-bar {
+        height: 6px;
+        border-radius: 3px;
+        background: #e2e8f0;
+        overflow: hidden;
+        position: relative;
+      }
+      .proficiency-fill {
+        height: 100%;
+        background: linear-gradient(to right, #00288e, #4648d4);
+      }
+      .timeline-line::before {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 24px;
+        bottom: 0;
+        width: 2px;
+        background: #e5eeff;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background font-body-md min-h-screen flex flex-col"
+  >
+    <!-- TopNavBar Component -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30 shadow-sm"
+    >
+      <div
+        class="flex justify-between items-center h-16 px-6 md:px-10 max-w-container-max mx-auto"
+      >
+        <div
+          class="text-headline-md font-headline-md font-bold tracking-tight text-primary"
+        >
+          SkillSphere
+        </div>
+        <div class="hidden md:flex items-center gap-lg">
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm"
+            href="#"
+            >Marketplace</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm"
+            href="#"
+            >Explore</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm"
+            href="#"
+            >Pro Services</a
+          >
+        </div>
+        <div class="flex items-center gap-base">
+          <button
+            class="px-md py-xs text-primary font-label-sm text-label-sm hover:bg-primary/5 transition-colors rounded-lg"
+          >
+            Sign In
+          </button>
+          <button
+            class="px-md py-xs bg-primary text-on-primary font-label-sm text-label-sm rounded-lg hover:shadow-md active:scale-95 transition-all"
+          >
+            Join as Freelancer
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <main
+      class="flex-grow pt-32 pb-xl px-gutter max-w-container-max mx-auto w-full"
+    >
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+        <!-- Left Column: Profile Bio Card -->
+        <aside class="lg:col-span-4 sticky top-24">
+          <div
+            class="glass-card rounded-xl overflow-hidden p-md flex flex-col gap-md"
+          >
+            <div
+              class="relative w-full aspect-square rounded-lg overflow-hidden group"
+            >
+              <img
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                data-alt="A professional high-end portrait of a creative director in their 30s with a warm and confident expression. The lighting is soft and artistic, using a modern light-mode palette with subtle blue rim lighting. The background is a minimalist, slightly blurred design studio with sleek furniture and digital screens. Professional photography style, sharp focus, vibrant yet clean colors."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrU09FdWJP5sauHfb99d55KE8QW73jjAHOg_6wNkRKM5n76W49UAa4Livs2KtJ2pgxSnzTSX9hVop8GxG7GQJKw4ZxsRiUaExkVw2w9z_VTPlUSehqX1zlwgTVQyuUUCxZjz6HGJT0Ki4qcxzLmS6CBcjqidm4LjDWxpu-gL19jDsxrJ67K4KFi78KjRYOd9jYoztEinbeT0gNT58GIZ6XYPhlpsKnNf1Kbw2gu21M_dEjIfnRYycIP9aHRK998fzG4P2Gtmh5ZTde"
+              />
+              <div
+                class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-sm py-xs rounded-full flex items-center gap-xs shadow-lg"
+              >
+                <span
+                  class="material-symbols-outlined text-[18px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+                <span class="text-label-sm font-label-sm">Verified</span>
+              </div>
+            </div>
+            <div class="flex flex-col gap-xs text-center md:text-left px-xs">
+              <h1 class="text-headline-md font-headline-md text-on-background">
+                Marcus Thorne
+              </h1>
+              <p class="text-body-lg font-body-lg text-primary font-semibold">
+                Senior Product Designer &amp; Systems Architect
+              </p>
+            </div>
+            <div
+              class="flex flex-wrap gap-sm justify-center md:justify-start px-xs border-y border-outline-variant/20 py-md"
+            >
+              <div class="flex items-center gap-xs text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary"
+                  >location_on</span
+                >
+                <span class="text-label-sm font-label-sm">Amsterdam, NL</span>
+              </div>
+              <div class="flex items-center gap-xs text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary"
+                  >payments</span
+                >
+                <span class="text-label-sm font-label-sm">$125 / hr</span>
+              </div>
+              <div class="flex items-center gap-xs text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary"
+                  >schedule</span
+                >
+                <span class="text-label-sm font-label-sm">40h / week</span>
+              </div>
+            </div>
+            <div class="flex flex-col gap-sm">
+              <button
+                class="w-full py-md bg-primary text-on-primary rounded-xl font-headline-md text-body-md hover:bg-secondary-container transition-all flex items-center justify-center gap-base shadow-sm"
+              >
+                <span class="material-symbols-outlined">mail</span>
+                Contact Marcus
+              </button>
+              <button
+                class="w-full py-md border border-primary text-primary rounded-xl font-headline-md text-body-md hover:bg-primary/5 transition-all flex items-center justify-center gap-base"
+              >
+                <span class="material-symbols-outlined">download</span>
+                Download Portfolio
+              </button>
+            </div>
+            <div class="flex justify-between items-center px-xs pt-base">
+              <div class="flex -space-x-2">
+                <div
+                  class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-dim"
+                ></div>
+                <div
+                  class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-primary-fixed"
+                ></div>
+                <div
+                  class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-secondary-fixed"
+                ></div>
+              </div>
+              <span class="text-label-sm font-label-sm text-on-surface-variant"
+                >42 Active Clients</span
+              >
+            </div>
+          </div>
+        </aside>
+        <!-- Right Column: Professional Content -->
+        <section class="lg:col-span-8 flex flex-col gap-lg">
+          <!-- About Section -->
+          <div class="glass-card rounded-xl p-lg flex flex-col gap-md">
+            <h2 class="text-headline-md font-headline-md text-primary">
+              About
+            </h2>
+            <p
+              class="text-body-lg font-body-lg text-on-surface-variant leading-relaxed"
+            >
+              With over 12 years of experience in the hyperlocal SaaS landscape,
+              I specialize in bridging the gap between complex engineering
+              requirements and intuitive human-centered design. I've helped
+              scale 15+ startups from seed to Series C by crafting design
+              systems that don't just look good, but perform at scale.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-md mt-base">
+              <div class="flex flex-col">
+                <span class="text-display-lg font-display-lg text-primary"
+                  >98%</span
+                >
+                <span
+                  class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest"
+                  >Success Rate</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span class="text-display-lg font-display-lg text-primary"
+                  >150+</span
+                >
+                <span
+                  class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest"
+                  >Projects</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span class="text-display-lg font-display-lg text-primary"
+                  >12y</span
+                >
+                <span
+                  class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest"
+                  >Exp</span
+                >
+              </div>
+              <div class="flex flex-col">
+                <span class="text-display-lg font-display-lg text-primary"
+                  >4.9</span
+                >
+                <span
+                  class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest"
+                  >Avg Rating</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Skills Section -->
+          <div class="glass-card rounded-xl p-lg flex flex-col gap-md">
+            <h2 class="text-headline-md font-headline-md text-primary">
+              Technical Skills
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-lg gap-y-md">
+              <div class="flex flex-col gap-xs">
+                <div class="flex justify-between text-label-sm font-label-sm">
+                  <span class="text-on-background"
+                    >Product Strategy &amp; Design Systems</span
+                  >
+                  <span class="text-primary">95%</span>
+                </div>
+                <div class="proficiency-bar">
+                  <div class="proficiency-fill" style="width: 95%"></div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-xs">
+                <div class="flex justify-between text-label-sm font-label-sm">
+                  <span class="text-on-background"
+                    >React &amp; Tailwind Architecture</span
+                  >
+                  <span class="text-primary">88%</span>
+                </div>
+                <div class="proficiency-bar">
+                  <div class="proficiency-fill" style="width: 88%"></div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-xs">
+                <div class="flex justify-between text-label-sm font-label-sm">
+                  <span class="text-on-background"
+                    >Advanced Interaction Prototyping</span
+                  >
+                  <span class="text-primary">92%</span>
+                </div>
+                <div class="proficiency-bar">
+                  <div class="proficiency-fill" style="width: 92%"></div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-xs">
+                <div class="flex justify-between text-label-sm font-label-sm">
+                  <span class="text-on-background"
+                    >UX Research &amp; Data Analysis</span
+                  >
+                  <span class="text-primary">80%</span>
+                </div>
+                <div class="proficiency-bar">
+                  <div class="proficiency-fill" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Portfolio Section -->
+          <div class="flex flex-col gap-md">
+            <div class="flex justify-between items-end">
+              <h2 class="text-headline-md font-headline-md text-primary">
+                Portfolio Showcase
+              </h2>
+              <a
+                class="text-primary font-label-sm text-label-sm flex items-center gap-xs hover:underline"
+                href="#"
+                >View All Projects
+                <span class="material-symbols-outlined">arrow_forward</span></a
+              >
+            </div>
+            <div class="masonry-grid gap-md">
+              <div
+                class="masonry-item-lg glass-card rounded-xl overflow-hidden relative group"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="A clean, modern SaaS dashboard interface design featuring glassmorphism elements, vibrant blue data charts, and a dark-themed sidebar. The UI is displayed on a high-resolution curved monitor in a dimly lit, high-tech workspace. Professional product photography style, cinematic lighting, sharp details of UI components."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMWuidQUVLWMN0t3Xzh3BE7mR_ELVUOsPY7VUW4BzbBjkNOg2iITHwtT2uz6V20loX7fpFCELVgsPvx-RiVaFixliD7ldBDAlLTt0X6cyKmUFghqPaCMydBOpClzh5lXzGO2Y9WdViSmoI6CcH8JVMwuUrcRC50JLVEV0XULYUFi4Xyw1pppU8QoRxMimANDrXIGWKyBTldMFp1q4YiNo3d863EEMCskQA0A7EjPnNmzpquhet3Zs6Pm52nBXOI5NSKh-Muh3XGMzx"
+                />
+                <div
+                  class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-md text-on-primary"
+                >
+                  <p
+                    class="text-label-sm font-bold uppercase tracking-widest mb-xs"
+                  >
+                    Web Application
+                  </p>
+                  <h3 class="font-headline-md text-body-lg">
+                    Nexus FinTech Platform
+                  </h3>
+                </div>
+              </div>
+              <div
+                class="masonry-item-sm glass-card rounded-xl overflow-hidden relative group"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="A collection of minimalist mobile app screens showing a health and wellness tracker. The design uses soft pastels, large rounded buttons, and elegant serif typography. The lighting is bright and airy, reflecting a clean light-mode aesthetic. High-fidelity UI mockups presented on sleek smartphone devices."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYz88Ior7L6ths77oJ5NnEVCZI1pXvB5EmZs4JH6k3MpHZmCiCzswXGA8dtSyadMzo7Hyd_evx94MqKUxnyf-QqCh9sIhbohjVgPoXiHN6uhQeT17eiZAj6nmVp6cdWCpCNbvlZlF2Bm8fdmK-CPsEzld9qZ0RtER-0dMkrFnF0ljG_N4TqlPs3iyczi7dLtUsE7wcxtwRRWYsSn2G-A5VAjKI02AtcjEpfg2FER0ckZqLMqIj92UoIx5AhiOoK3_oilQ6O7A3IrTW"
+                />
+                <div
+                  class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-md text-on-primary"
+                >
+                  <p
+                    class="text-label-sm font-bold uppercase tracking-widest mb-xs"
+                  >
+                    Mobile App
+                  </p>
+                  <h3 class="font-headline-md text-body-lg">
+                    Aura Wellness UI
+                  </h3>
+                </div>
+              </div>
+              <div
+                class="masonry-item-md glass-card rounded-xl overflow-hidden relative group"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="A premium brand identity project showing a logo design on high-quality stationery and a matte black business card. The aesthetic is extremely minimalist and luxury-oriented, utilizing silver foil accents and deep navy backgrounds. Shot in a professional studio setting with sharp focus and elegant shadows."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIdNRDtCEs4J68R3wPdeGJrQIpQJXyTG_CD_sQphNGqZsiSMWKKCbEbXFO-4KoqnIx7gq0snbZ7y8x3FbfZ1VNadhlLfoHiruYlE5v-d6HOtW0kPsySsZGIuSxBchROCBCrtJvgFXmgwasWah0Q8DsdZShvlL3_c2qOVYn9UEEd30GyJP2fE_u3NeqEMpXRIxdjxakk-xBVdN8eBo__6jTC8fEYIV1Vt2JBoPQ1o0q6iQo1xA1xkqyh83PEsvYUMCDRloPC2luPwXs"
+                />
+                <div
+                  class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-md text-on-primary"
+                >
+                  <p
+                    class="text-label-sm font-bold uppercase tracking-widest mb-xs"
+                  >
+                    Branding
+                  </p>
+                  <h3 class="font-headline-md text-body-lg">
+                    Velvet Capital Identity
+                  </h3>
+                </div>
+              </div>
+              <div
+                class="masonry-item-md glass-card rounded-xl overflow-hidden relative group"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="An intricate design system documentation page displayed on a tablet. The page shows color palettes, typography scales, and a library of buttons and form elements. The style is technical and organized, with a clean layout and vibrant blue primary accents. Highly detailed and professional presentation."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdHmhOiWQYsO3qCrtkJk910_H1cHAgxKIeMRtIuMWnly_GnvkNdpoCOAv7BYZZbGMRoCpypxd5Q21UcNBrSVKS3N_62llttRtbONj7jTOoxCNU-d9_ZbLhxx2PeNec6FURGeIJVGyyeF3m00qJHGLDrNamF_g-TM1HWVt7KaQ4pFrUM3t1KSUc-Nq3BpsjchrHDwIB-86Oezv_EapGAOSmSa9CzKZBuFZ5jyFKMo_vzOpmBxo36JB0Qei67JYHn6Omtk0xJE1iKOL1"
+                />
+                <div
+                  class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-md text-on-primary"
+                >
+                  <p
+                    class="text-label-sm font-bold uppercase tracking-widest mb-xs"
+                  >
+                    Design System
+                  </p>
+                  <h3 class="font-headline-md text-body-lg">
+                    SkillSphere Core Library
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Experience Timeline -->
+          <div class="glass-card rounded-xl p-lg flex flex-col gap-lg">
+            <h2 class="text-headline-md font-headline-md text-primary">
+              Experience
+            </h2>
+            <div class="flex flex-col gap-lg relative timeline-line">
+              <div class="flex gap-md relative pl-8">
+                <div
+                  class="absolute left-0 top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-primary-fixed ring-opacity-50"
+                ></div>
+                <div class="flex flex-col gap-xs">
+                  <span
+                    class="text-label-sm font-label-sm text-primary font-bold"
+                    >2021 — PRESENT</span
+                  >
+                  <h3 class="text-body-lg font-bold">Lead Product Designer</h3>
+                  <p class="text-on-surface font-semibold">
+                    FlowState SaaS Solutions
+                  </p>
+                  <p class="text-on-surface-variant text-body-md mt-xs">
+                    Pioneered the transition to a glassmorphic design language
+                    across 4 core products, resulting in a 35% increase in user
+                    engagement and 20% reduction in churn.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-md relative pl-8">
+                <div
+                  class="absolute left-0 top-1 w-4 h-4 rounded-full bg-surface-dim"
+                ></div>
+                <div class="flex flex-col gap-xs">
+                  <span
+                    class="text-label-sm font-label-sm text-on-surface-variant"
+                    >2018 — 2021</span
+                  >
+                  <h3 class="text-body-lg font-bold">Senior UX Designer</h3>
+                  <p class="text-on-surface font-semibold">
+                    UrbanLink Marketplaces
+                  </p>
+                  <p class="text-on-surface-variant text-body-md mt-xs">
+                    Optimized the hyperlocal search experience for 2 million
+                    active users. Managed a design team of 5 and established the
+                    company's first centralized Figma library.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-md relative pl-8">
+                <div
+                  class="absolute left-0 top-1 w-4 h-4 rounded-full bg-surface-dim"
+                ></div>
+                <div class="flex flex-col gap-xs">
+                  <span
+                    class="text-label-sm font-label-sm text-on-surface-variant"
+                    >2015 — 2018</span
+                  >
+                  <h3 class="text-body-lg font-bold">Visual Designer</h3>
+                  <p class="text-on-surface font-semibold">
+                    Nova Creative Agency
+                  </p>
+                  <p class="text-on-surface-variant text-body-md mt-xs">
+                    Developed award-winning web experiences for Fortune 500
+                    clients. Focused on high-fidelity motion design and
+                    immersive digital storytelling.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Reviews Section -->
+          <div class="glass-card rounded-xl p-lg flex flex-col gap-md">
+            <div class="flex justify-between items-center">
+              <h2 class="text-headline-md font-headline-md text-primary">
+                Client Feedback
+              </h2>
+              <div class="flex items-center gap-xs">
+                <span
+                  class="material-symbols-outlined text-amber-500"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >star</span
+                >
+                <span class="font-bold text-body-lg">4.9</span>
+                <span class="text-on-surface-variant text-label-sm"
+                  >(128 Reviews)</span
+                >
+              </div>
+            </div>
+            <div
+              class="flex flex-col gap-md divide-y divide-outline-variant/30"
+            >
+              <div class="pt-md flex flex-col gap-sm">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-secondary"
+                    >
+                      EL
+                    </div>
+                    <div>
+                      <p class="font-bold text-on-background">Elena Lambert</p>
+                      <p
+                        class="text-label-sm font-label-sm text-on-surface-variant"
+                      >
+                        CEO, Nexus FinTech
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex text-amber-500">
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                  </div>
+                </div>
+                <p class="text-on-surface-variant leading-relaxed">
+                  "Marcus is a rare find. He doesn't just design; he understands
+                  the business logic behind every decision. Our platform's
+                  conversion rate increased by 40% within two months of his
+                  redesign."
+                </p>
+              </div>
+              <div class="pt-md flex flex-col gap-sm">
+                <div class="flex justify-between">
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary"
+                    >
+                      JK
+                    </div>
+                    <div>
+                      <p class="font-bold text-on-background">Julian Kress</p>
+                      <p
+                        class="text-label-sm font-label-sm text-on-surface-variant"
+                      >
+                        Product Manager, Aura
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex text-amber-500">
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                  </div>
+                </div>
+                <p class="text-on-surface-variant leading-relaxed">
+                  "Exceptional eye for detail and interaction design. Marcus
+                  transformed our messy MVP into a polished, professional
+                  product that our investors absolutely loved."
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Footer Component -->
+    <footer
+      class="w-full py-xl mt-auto bg-surface-container-lowest border-t border-outline-variant/50"
+    >
+      <div
+        class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-base"
+      >
+        <div class="text-headline-md font-headline-md text-primary">
+          SkillSphere
+        </div>
+        <div class="flex flex-wrap justify-center gap-md">
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-label-sm font-label-sm"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-label-sm font-label-sm"
+            href="#"
+            >Terms of Service</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-label-sm font-label-sm"
+            href="#"
+            >Cookie Settings</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-label-sm font-label-sm"
+            href="#"
+            >Contact Us</a
+          >
+        </div>
+        <p class="text-on-surface-variant text-body-md font-body-md">
+          © 2024 SkillSphere Ecosystem. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script>
+      // Micro-interaction for skill bars on scroll
+      const observerOptions = {
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const bars = entry.target.querySelectorAll(".proficiency-fill");
+            bars.forEach((bar) => {
+              const targetWidth = bar.style.width;
+              bar.style.width = "0%";
+              setTimeout(() => {
+                bar.style.transition =
+                  "width 1.5s cubic-bezier(0.65, 0, 0.35, 1)";
+                bar.style.width = targetWidth;
+              }, 100);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".glass-card")
+        .forEach((card) => observer.observe(card));
+
+      // Hover effect for portfolio items
+      document.querySelectorAll(".masonry-grid > div").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          item.classList.add("shadow-xl");
+        });
+        item.addEventListener("mouseleave", () => {
+          item.classList.remove("shadow-xl");
+        });
+      });
+    </script>
+  </body>
+</html>

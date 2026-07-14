@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkillSphere | Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #00288e;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#fffbff",
+                      "on-secondary-fixed": "#07006c",
+                      "surface-container-low": "#eff4ff",
+                      "tertiary": "#003853",
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#dce9ff",
+                      "on-primary-fixed-variant": "#173bab",
+                      "surface-container": "#e5eeff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-bright": "#f8f9ff",
+                      "background": "#f8f9ff",
+                      "on-tertiary-fixed": "#001e2f",
+                      "error-container": "#ffdad6",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#0b1c30",
+                      "surface": "#f8f9ff",
+                      "outline-variant": "#c4c5d5",
+                      "inverse-surface": "#213145",
+                      "surface-dim": "#cbdbf5",
+                      "surface-container-lowest": "#ffffff",
+                      "error": "#ba1a1a",
+                      "primary": "#00288e",
+                      "secondary": "#4648d4",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#444653",
+                      "primary-fixed": "#dde1ff",
+                      "surface-tint": "#3755c3",
+                      "outline": "#757684",
+                      "tertiary-container": "#005074",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-primary-fixed": "#001453",
+                      "primary-fixed-dim": "#b8c4ff",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "secondary-container": "#6063ee",
+                      "primary-container": "#1e40af",
+                      "on-primary-container": "#a8b8ff",
+                      "on-tertiary-container": "#68c4ff",
+                      "inverse-primary": "#b8c4ff",
+                      "on-surface": "#0b1c30",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#d3e4fe",
+                      "secondary-fixed": "#e1e0ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "xl": "64px",
+                      "gutter": "24px",
+                      "sm": "12px",
+                      "lg": "40px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center h-16 px-6 md:px-10 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold tracking-tight text-primary">SkillSphere</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-primary font-semibold border-b-2 border-primary py-2 text-label-sm" href="#">Marketplace</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm" href="#">Pro Services</a>
+</div>
+<div class="flex items-center gap-base">
+<button class="px-md py-xs text-label-sm font-label-sm text-primary hover:bg-primary/5 transition-colors rounded-lg">Sign In</button>
+<button class="px-md py-xs bg-primary text-on-primary text-label-sm font-label-sm rounded-lg shadow-sm hover:opacity-90 active:scale-95 transition-all">Join as Freelancer</button>
+</div>
+</div>
+</nav>
+<main class="flex-grow pt-16 flex max-w-container-max mx-auto w-full">
+<!-- Sidebar Filter Panel -->
+<aside class="hidden lg:flex flex-col w-72 h-[calc(100vh-64px)] sticky top-16 border-r border-outline-variant/20 p-gutter overflow-y-auto custom-scrollbar bg-surface-container-lowest">
+<div class="flex flex-col gap-lg">
+<!-- Search Keyword -->
+<div class="flex flex-col gap-base">
+<label class="text-label-sm font-semibold text-on-surface-variant">Keywords</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-body-md">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 text-body-md" placeholder="Design, Web, Writing..." type="text"/>
+</div>
+</div>
+<!-- Category -->
+<div class="flex flex-col gap-base">
+<label class="text-label-sm font-semibold text-on-surface-variant">Category</label>
+<select class="w-full px-4 py-2 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 text-body-md appearance-none">
+<option>All Categories</option>
+<option>Graphics &amp; Design</option>
+<option>Digital Marketing</option>
+<option>Writing &amp; Translation</option>
+<option>Video &amp; Animation</option>
+<option>Programming &amp; Tech</option>
+</select>
+</div>
+<!-- Budget Range -->
+<div class="flex flex-col gap-base">
+<div class="flex justify-between items-center">
+<label class="text-label-sm font-semibold text-on-surface-variant">Budget</label>
+<span class="text-label-sm text-primary font-bold">$0 - $5000+</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-full appearance-none cursor-pointer" max="10000" min="0" step="100" type="range"/>
+<div class="flex justify-between text-[10px] text-outline font-medium">
+<span>$0</span>
+<span>$10k</span>
+</div>
+</div>
+<!-- Experience Level -->
+<div class="flex flex-col gap-base">
+<label class="text-label-sm font-semibold text-on-surface-variant">Experience Level</label>
+<div class="flex flex-col gap-xs">
+<label class="flex items-center gap-base cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Entry Level</span>
+</label>
+<label class="flex items-center gap-base cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Intermediate</span>
+</label>
+<label checked="" class="flex items-center gap-base cursor-pointer group">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Expert / Pro</span>
+</label>
+</div>
+</div>
+<!-- Rating -->
+<div class="flex flex-col gap-base">
+<label class="text-label-sm font-semibold text-on-surface-variant">Seller Rating</label>
+<div class="flex flex-col gap-xs">
+<label class="flex items-center gap-base cursor-pointer">
+<input class="text-primary focus:ring-primary/20" name="rating" type="radio"/>
+<div class="flex text-yellow-500">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 0;">star</span>
+<span class="ml-2 text-on-surface-variant text-body-md">&amp; Up</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Location Radius -->
+<div class="flex flex-col gap-base">
+<label class="text-label-sm font-semibold text-on-surface-variant">Location Radius</label>
+<div class="flex items-center gap-base px-4 py-2 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-outline text-body-md">location_on</span>
+<input class="bg-transparent border-none p-0 focus:ring-0 text-body-md w-full" placeholder="Near me" type="text"/>
+</div>
+</div>
+<button class="w-full py-3 bg-secondary text-on-secondary-container rounded-xl font-semibold shadow-md hover:brightness-110 transition-all mt-4">Apply Filters</button>
+</div>
+</aside>
+<!-- Results Grid -->
+<section class="flex-grow p-gutter md:p-lg flex flex-col gap-lg">
+<!-- Applied Filters & Sorting -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div class="flex flex-wrap items-center gap-base">
+<span class="text-label-sm font-bold text-on-surface-variant mr-base">Applied:</span>
+<div class="px-3 py-1 bg-primary/10 text-primary text-label-sm rounded-full flex items-center gap-xs">
+                        Pro Services <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</div>
+<div class="px-3 py-1 bg-primary/10 text-primary text-label-sm rounded-full flex items-center gap-xs">
+                        $500+ <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</div>
+<button class="text-label-sm text-outline hover:text-primary underline font-medium">Clear All</button>
+</div>
+<div class="flex items-center gap-base">
+<span class="text-label-sm text-on-surface-variant">Sort by:</span>
+<select class="bg-transparent border-none text-label-sm font-bold text-primary focus:ring-0 p-0 cursor-pointer">
+<option>Best Selling</option>
+<option>Newest Arrivals</option>
+<option>Price: Low to High</option>
+</select>
+</div>
+</div>
+<!-- Bento-ish Grid of Gig Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-lg">
+<!-- Gig Card 1 -->
+<div class="glass-card rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A professional workspace for a high-end UI designer with three large studio monitors displaying complex vector interface designs. The lighting is soft and atmospheric with cool blue tones, suggesting a premium, high-performance SaaS design environment for SkillSphere. Minimalist aesthetic with expensive peripherals and sleek desk setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGceAaRZjfWgSJP4EJCtQXKZP0lDFqd9FflFO0bBM2FZUwN8TX_jERqmYiZtkRwbRwZIM-PdnZLfrb3OHWomQ6-t2zjlETDfbMLNXRIfxwHzzFkqoaPzqFs9w0N1BowrxAHVJzR6deiRQmBTgVciZd7cbdHgdS0h24i4RWK8rmoR_qwCCH9LqKbBgsdMkvWyw2KCVwox5yubmmXDQo2mNjgm7HodozgSgTfspBXZulbY5m3j9xKYLofagf2uAEDpHzy1X9pt-v0c4H"/>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 rounded-full bg-white/80 backdrop-blur shadow-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow gap-base">
+<div class="flex items-center gap-base">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of a female digital artist with short stylish hair, wearing professional designer glasses. She is smiling warmly in a bright, modern studio setting with a clean background. The image has a professional, high-fidelity look suited for an elite freelancer profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa8b8-eRZ-hB983h2G94Kk4iofPndVqb8a6DRD8Gdyuvqk9BIZf25zCMqVE0HJWiHVtiBofAoVs39-d1w5kZRCdJ5PEes-MWdBl5s4amYROeNzLuE6RTp7ufcjQp-km3pUW76APWh66KEXEx6NlZMv6I6ZXTlbtO3lYVV1xlXn8vSINJCBeM83JLGc2S8WuqsVkD5iTdNve4GU-Pae-Qt-nzLve-COhlH_lzqEaQJL6bRywDsSG24-NQ1RhbW6dpi3HnweGUst68l9"/>
+<div class="flex flex-col">
+<span class="text-label-sm font-bold text-on-surface">Alex Riviera</span>
+<span class="text-[10px] text-primary uppercase font-bold tracking-widest">Level 2 Seller</span>
+</div>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-background line-clamp-2 group-hover:text-primary transition-colors cursor-pointer">I will design a modern high-fidelity SaaS dashboard UI UX</h3>
+<div class="mt-auto pt-base flex items-center justify-between border-t border-outline-variant/20">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-yellow-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-bold">4.9</span>
+<span class="text-label-sm text-outline">(124)</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-outline uppercase font-bold">Starting At</p>
+<p class="text-body-lg font-bold text-primary">$850</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Gig Card 2 -->
+<div class="glass-card rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up of a high-end mechanical keyboard and a digital drawing tablet on a desk with abstract colorful lights reflecting off the surfaces. The background shows blurred lines of code on a monitor, creating a tech-focused atmosphere for a full-stack developer workspace. Vibrant neon accents contrast with a deep slate background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwjCW4u7IpYC2Fa5_rRg5zJdkSso7xDFpTT4M960XdHa9DyJOe20lZN1n3C30P6n6ZgFejpnM7ybhc6tZM7VCK1GQUlLk16L95Kxca6YPLbT38KQNtzzyaKs4EaJqXPwxus5xa5MnSYLdtLMa_cxqFGlzCJMW4MNCGJPQwMhjqhsE3q5wj2tc1mg4T_RCZj9KKkt1exWHPLeF1P3xpLXaL4fAh-Ow4K7OdQtR_AV7_FGA46uLnCpEgkV0exxAdH5Pbak3B9tHm6GLT"/>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 rounded-full bg-white/80 backdrop-blur shadow-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow gap-base">
+<div class="flex items-center gap-base">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A portrait of a confident male developer in his 30s with a neat beard and professional attire, sitting in a contemporary coworking space. The lighting is cinematic with warm accents, emphasizing his expertise and professionalism as a top-rated software architect for SkillSphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkYKgft6rZevTU-2yQbhpq2BfNPChLrKO0IyaLxhNq41WmZrJbpeFVUwV_O0xigzlvGbSZT7u28PuSRR-wEEEkazn4R-ESfHvkDOzNy8DSDxRnsGiRDGlbCkqWYZQBCjaaOPFAd68Zy_7XM9qOZ7FPo46_HmKiHURt5yFDYyTy91iWVzirvCkHRQWkI3rYZgsihks_Xe_rlPKfhuMH9EycPNTrF2b_Fy2DCbkY0aU5hp6mX8ID8GV-kFCjZVikSaflElXqqeiGpWms"/>
+<div class="flex flex-col">
+<span class="text-label-sm font-bold text-on-surface">Jordan Vane</span>
+<span class="text-[10px] text-secondary uppercase font-bold tracking-widest">Top Rated</span>
+</div>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-background line-clamp-2 group-hover:text-primary transition-colors cursor-pointer">Build a custom scalable React.js web application from scratch</h3>
+<div class="mt-auto pt-base flex items-center justify-between border-t border-outline-variant/20">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-yellow-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-bold">5.0</span>
+<span class="text-label-sm text-outline">(89)</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-outline uppercase font-bold">Starting At</p>
+<p class="text-body-lg font-bold text-primary">$1,200</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Gig Card 3 -->
+<div class="glass-card rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An artistic view of a high-end photography studio setup with softbox lights, a professional camera on a gimbal, and a lush green plant in the corner. The scene is bright and airy, representing high-quality videography and digital content creation services. Modern and sophisticated light-mode aesthetic for a creative professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWYZ3hhGyu5CfzIcujkgo5ZoZdLbljblsGSjSUArmhP3XkH1Q0-KZvgte13txFwS7X2Yg_nkZ0RpuJouF6bJOhJKSxMiipOXXRcMO2OJEvIczZjAmj00H6RK9Y7FYYbXClvff_ajlh0iBu1ANDJwPunVvshVA_A9g6JDjcA00QwuDD1ZUOWo4ytV1YL_-_DCD3c5dvn7qd4GqXRlf9N3vPZQZ7VL-Qedtkj0DRSz7EjJnyz_mW2mAnTMf1WyOtqRV7tGX81GMmp889"/>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 rounded-full bg-white/80 backdrop-blur shadow-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow gap-base">
+<div class="flex items-center gap-base">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A cheerful portrait of a female content creator with curly hair, holding a professional microphone in a podcasting studio environment. She is surrounded by soundproofing panels and warm lighting. The image conveys energy, creativity, and professional production quality for the SkillSphere marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhyZGEPvSOFOYm4SWMrPzb9oIGWkcrQInIhX_R4fS9Uw1VFZosdh9SyDZf1aJbEIzFmuTTI2RhygGA_bznEgEkQffHFqYBIaS0x4AkdhdQrhrNa30LE2GM_rn8_-VcWrwle39jPs9RKxZ_-aRLCoGeNQg_ubvmyJvarcrJCGYhFp_1Fmk_8ymbS6Qrc6WH348DLmC-SrLpP1K1KhfnvadsT41vNcw32z0z1nh30KmF1Gqg6BUSclutFI3sjF1feKUnPqUr9xBIKG5i"/>
+<div class="flex flex-col">
+<span class="text-label-sm font-bold text-on-surface">Maya Sterling</span>
+<span class="text-[10px] text-primary uppercase font-bold tracking-widest">Rising Talent</span>
+</div>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-background line-clamp-2 group-hover:text-primary transition-colors cursor-pointer">Professional 4K commercial video editing and motion graphics</h3>
+<div class="mt-auto pt-base flex items-center justify-between border-t border-outline-variant/20">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-yellow-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-bold">4.8</span>
+<span class="text-label-sm text-outline">(56)</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-outline uppercase font-bold">Starting At</p>
+<p class="text-body-lg font-bold text-primary">$450</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Gig Card 4 -->
+<div class="glass-card rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A minimalist desk setup featuring a tablet with a digital stylus, an open notebook with elegant sketches, and a cup of specialty coffee. The lighting is soft morning sun, creating a peaceful and focused atmosphere for high-quality writing and brand strategy services. Clean, white-centric aesthetic with subtle grey and primary blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4fnoMGvWg5XIkyVbjh-YMJpSP2EPeYFS6-WCCay7tBteNB8pkNfDlZdQAde4gvlmAB8KmlgHyT0ItCY1tGuGrtIAJHJKq53qZO5o08yuaMNtKN0yg7VQGa0Z7FU5b11YPpsxKweaer6mt4X8cuMMCLtHWUJTES55M8R7LlNDEVd1JPPO6qVrnHBadAkfurC4c55z2WaVX6Xsq8Vkdwzuwlpp5tvWeujJ7_qkEfZokXnnaYwUNvbjFhGDmmO_SSiFuRVh-36pUswFf"/>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 rounded-full bg-white/80 backdrop-blur shadow-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow gap-base">
+<div class="flex items-center gap-base">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A portrait of an experienced male copywriter in his 40s with glasses, leaning back in a leather chair in a home library filled with books. The scene is sophisticated and evokes intellectual authority and depth of knowledge. Warm tones and premium finishes highlight his expert status." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXGjdZPzVP2_stmoGBDdcMiivFSD1qMIw_sz7S-cpQCo4FN5m_lHthIIHxo5C9cNPa_gZLvxazK6DdpYGNpu09-WY_BOugTlPaPQBbP7QS4ibtZySrro9k5lcmveL-g0f0aijUMCezpoTPGKAUr8mpZCfGYQi4EtwUUiinr3tmA8-hVkFoq0rf6ZE9OqpsQa6B4C6LxCOxkLZBA05KlHLeRd8YC78aMEOBHp3qb1iSgmx2x1BKTjqaFropTp_AU1N1dK1lK3Zx-S50"/>
+<div class="flex flex-col">
+<span class="text-label-sm font-bold text-on-surface">Liam Foster</span>
+<span class="text-[10px] text-primary uppercase font-bold tracking-widest">Level 2 Seller</span>
+</div>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-background line-clamp-2 group-hover:text-primary transition-colors cursor-pointer">Premium SEO copywriting and strategic brand storytelling</h3>
+<div class="mt-auto pt-base flex items-center justify-between border-t border-outline-variant/20">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-yellow-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-bold">4.9</span>
+<span class="text-label-sm text-outline">(210)</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-outline uppercase font-bold">Starting At</p>
+<p class="text-body-lg font-bold text-primary">$300</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Gig Card 5 -->
+<div class="glass-card rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A high-tech digital marketing hub with multiple monitors showing complex data visualizations, charts, and global maps. The lighting is cool and professional, emphasizing a data-driven approach to freelance marketing. Minimalist, modern light-mode office setting for SkillSphere's pro services." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQAY6MPRuQhNaIRk7lUhVdX_yGZFTk2ugAx6_VDIeLT7RxQWwlk1mvCqD5Zn1BBWANRDa8eqhPwDtQcJCzp0qDRpp2JbFMYNhUmJYL0bnNfvqK8hJ1KNl5dtnMny8cxSE_T742h7YXDbavIkrqJGulVtrOVeQwBflP2VPDPOKG9uI-i4wx9KhT7T6T0OvnoXhW9zp_Xdzd1blEYBZL5eTnY_tzbQMcHZlzOvwPLz8mX2TdY04ldmXm_jBmk8GXmRXmRuajvhQEEqXY"/>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 rounded-full bg-white/80 backdrop-blur shadow-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow gap-base">
+<div class="flex items-center gap-base">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Professional headshot of a young woman with a bright smile, wearing a modern blazer. She looks approachable and professional, set against a clean, light-colored background that fits the SkillSphere design system aesthetic. Sharp focus and high-end photographic quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC47hYc355UJFeiOvzKB2fKUN1o4dq_Hlri8Xu6k4HsRRl102YoQTQcwg8DyqN2fjK4Yyab47OSh7TdKXJWye1yfwUc_mzcnBVT_SRO41rbJuJfuZqR6N1_695pln5y9w3dzlaWYAwyEDw9kk6P8Kq1KRKbhGgxJNmno9FqubmSEUh_p0mLIknOe924rU5XoXvqnbUEpgkojR3ZoWWwAqP_HfhRf0yNx0uqICbbxYPGVpCpL1CfH3QkN4mhvo6nPBeV3wiiFVemXi9F"/>
+<div class="flex flex-col">
+<span class="text-label-sm font-bold text-on-surface">Elena G.</span>
+<span class="text-[10px] text-secondary uppercase font-bold tracking-widest">Top Rated</span>
+</div>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-background line-clamp-2 group-hover:text-primary transition-colors cursor-pointer">Advanced Facebook and Google Ads management for e-commerce</h3>
+<div class="mt-auto pt-base flex items-center justify-between border-t border-outline-variant/20">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-yellow-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-bold">5.0</span>
+<span class="text-label-sm text-outline">(342)</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-outline uppercase font-bold">Starting At</p>
+<p class="text-body-lg font-bold text-primary">$1,500</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Gig Card 6 -->
+<div class="glass-card rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A clean, minimalist 3D workstation with a powerful desktop computer and dual high-resolution monitors displaying 3D character models and architectural renders. The lighting is soft and neutral, conveying a high-tech, professional atmosphere for 3D modeling and animation services on SkillSphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHzCRDiRaGwfawRstjTeaydQsQt-5w1_a4wmhwUPVSQhNOC7LmHSyb4ZRvjOi0zvHdFhkV4fstZozkoYPTIqSJim8E4VITpeetSwi7NkCQG2Y5uNR-mFO6dSv8z0Nc3t7TczT8umt29aPuQXu1fyPGqhhhPUHECOMg9VXGraZlG9z6cYV0jtMjMHSGItMe_obrMQuHp73YEkR4Vv0H8axHTr1hdGrhd5xwsXmjks0G6Q3-msPOYmGAsxc4zRLEaau7LUmFwkwuGJ1b"/>
+<div class="absolute top-3 right-3 z-10">
+<button class="w-8 h-8 rounded-full bg-white/80 backdrop-blur shadow-md flex items-center justify-center text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow gap-base">
+<div class="flex items-center gap-base">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A portrait of a male 3D artist with a focused expression, wearing a high-quality tech-wear hoodie. He is in a dimly lit studio with glowing accent lights in the background. The mood is high-performance and innovative, representing the next generation of creative freelancers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5N21lCQT2Vds5oNmXgP6WqloMFTA5PwrI-zCxOHWgzmVYG8m6_rVQkeaB6VoXs1-0p91r15KkgaDQMS0jzzlD9OjF6wjFMh4oJ0Ke-c3JhA6ZksZFzDm2YvxZlWYA49YAi-dlFuh5VzBHebFhWh-GjjJl9QUWta1ltX9vRvYIfJfn8OB7S7bF1fryaIyiVrID36fk8h1cQvimjLWT_1zmZ2WGHpolx3le_KJNYyM9MfMoGfRbpKiBMAdNifCbib7yx9ACenZHRzFC"/>
+<div class="flex flex-col">
+<span class="text-label-sm font-bold text-on-surface">S. Petrov</span>
+<span class="text-[10px] text-primary uppercase font-bold tracking-widest">Level 1 Seller</span>
+</div>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-background line-clamp-2 group-hover:text-primary transition-colors cursor-pointer">Custom 3D character modeling and texturing for game assets</h3>
+<div class="mt-auto pt-base flex items-center justify-between border-t border-outline-variant/20">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-yellow-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-bold">4.7</span>
+<span class="text-label-sm text-outline">(42)</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-outline uppercase font-bold">Starting At</p>
+<p class="text-body-lg font-bold text-primary">$600</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-center mt-xl gap-base">
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary font-bold text-label-sm">1</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-sm font-medium">2</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-sm font-medium">3</button>
+<span class="text-outline mx-xs">...</span>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-sm font-medium">12</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl mt-auto bg-surface-container-lowest border-t border-outline-variant/50">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-base">
+<div class="text-headline-md font-headline-md text-primary">SkillSphere</div>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Contact Us</a>
+</div>
+<div class="text-on-surface-variant text-label-sm">© 2024 SkillSphere Ecosystem. All rights reserved.</div>
+</div>
+</footer>
+<!-- Mobile FAB -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center z-50 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<script>
+        // Micro-interactions and effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Add active state to pagination
+        const paginationBtns = document.querySelectorAll('.pagination-btn');
+        paginationBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                paginationBtns.forEach(b => b.classList.remove('bg-primary', 'text-on-primary'));
+                btn.classList.add('bg-primary', 'text-on-primary');
+            });
+        });
+    </script>
+</body></html>

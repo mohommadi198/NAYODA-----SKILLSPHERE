@@ -1,0 +1,2747 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>FreelanceHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f8fafc;
+        color: #0f172a;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      button {
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #e2e8f0;
+        transition: box-shadow 0.3s;
+      }
+      nav.scrolled {
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
+      .nav-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 20px;
+        font-weight: 800;
+        color: #0f172a;
+        flex-shrink: 0;
+      }
+      .nav-logo-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .nav-logo-icon svg {
+        width: 16px;
+        height: 16px;
+        fill: white;
+      }
+      .nav-logo span {
+        color: #2563eb;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+      .nav-links a {
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #475569;
+        transition: all 0.2s;
+      }
+      .nav-links a:hover {
+        background: #f1f5f9;
+        color: #0f172a;
+      }
+      .nav-links a.active {
+        background: #eff6ff;
+        color: #2563eb;
+      }
+      .nav-auth {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-ghost {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #475569;
+        background: none;
+        border: none;
+        border-radius: 8px;
+        transition: color 0.2s;
+      }
+      .btn-ghost:hover {
+        color: #0f172a;
+      }
+      .btn-primary {
+        padding: 9px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        transition: all 0.2s;
+      }
+      .btn-primary:hover {
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        transform: translateY(-1px);
+      }
+      .nav-hamburger {
+        display: none;
+        background: none;
+        border: none;
+        padding: 6px;
+        color: #475569;
+        border-radius: 8px;
+      }
+      .nav-hamburger:hover {
+        background: #f1f5f9;
+      }
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 12px 20px 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+      .mobile-menu.open {
+        display: block;
+      }
+      .mobile-menu a {
+        display: block;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #475569;
+        border-radius: 8px;
+        margin-bottom: 2px;
+      }
+      .mobile-menu a.active {
+        color: #2563eb;
+        background: #eff6ff;
+      }
+      .mobile-menu .btn-primary {
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      /* HERO */
+      .hero {
+        padding: 120px 24px 72px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse 80% 60% at 50% 0%,
+          rgba(37, 99, 235, 0.09),
+          transparent 70%
+        );
+      }
+      .hero-blob1 {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(124, 58, 237, 0.08),
+          transparent 70%
+        );
+        filter: blur(40px);
+      }
+      .hero-blob2 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(8, 145, 178, 0.08),
+          transparent 70%
+        );
+        filter: blur(40px);
+      }
+      .hero-content {
+        position: relative;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 16px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1d4ed8;
+        margin-bottom: 24px;
+        animation: float 3s ease-in-out infinite;
+      }
+      .badge svg {
+        width: 15px;
+        height: 15px;
+        fill: #f59e0b;
+      }
+      h1 {
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        color: #0f172a;
+        margin-bottom: 20px;
+      }
+      h1 .hl {
+        color: #2563eb;
+        position: relative;
+        display: inline-block;
+      }
+      .underline-svg {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+      }
+      .hero-desc {
+        font-size: 18px;
+        color: #475569;
+        max-width: 580px;
+        margin: 0 auto 32px;
+        line-height: 1.7;
+      }
+      .hero-btns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 40px;
+      }
+      .btn-hero-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        transition: all 0.2s;
+      }
+      .btn-hero-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+      }
+      .btn-hero-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 28px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #0f172a;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s;
+      }
+      .btn-hero-secondary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      }
+      .play-circle {
+        width: 26px;
+        height: 26px;
+        background: #eff6ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .play-circle svg {
+        width: 10px;
+        height: 10px;
+        fill: #2563eb;
+        margin-left: 2px;
+      }
+
+      /* SEARCHBAR */
+      .search-wrap {
+        max-width: 760px;
+        margin: 0 auto 28px;
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        padding: 8px;
+      }
+      .search-inner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .search-field {
+        flex: 1;
+        min-width: 140px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        transition: all 0.2s;
+      }
+      .search-field:focus-within {
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+      .search-field svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: #94a3b8;
+        fill: currentColor;
+      }
+      .search-field input,
+      .search-field select {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-family: inherit;
+        color: #0f172a;
+        outline: none;
+        font-weight: 500;
+      }
+      .search-field input::placeholder {
+        color: #94a3b8;
+      }
+      .search-field select {
+        color: #475569;
+        cursor: pointer;
+      }
+      .search-field select option {
+        color: #0f172a;
+      }
+      .btn-search {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 11px 22px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        border: none;
+        border-radius: 10px;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        transition: all 0.2s;
+      }
+      .btn-search:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+      }
+      .btn-search svg {
+        width: 15px;
+        height: 15px;
+        fill: white;
+      }
+
+      /* TRENDING TAGS */
+      .trending {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+      }
+      .trending-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #94a3b8;
+      }
+      .tag {
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #475569;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 999px;
+        transition: all 0.2s;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      }
+      .tag:hover {
+        border-color: #93c5fd;
+        color: #2563eb;
+      }
+
+      /* STATS */
+      .stats {
+        padding: 28px 24px 56px;
+      }
+      .stats-grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .stat-card {
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .stat-card:hover {
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+      }
+      .stat-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .stat-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+      .stat-val {
+        font-size: 26px;
+        font-weight: 900;
+        color: #0f172a;
+      }
+      .stat-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: #0f172a;
+        margin-top: 2px;
+      }
+      .stat-desc {
+        font-size: 12px;
+        color: #94a3b8;
+        margin-top: 2px;
+        line-height: 1.4;
+      }
+
+      /* SECTION HEADER */
+      .section-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 36px;
+      }
+      .section-eyebrow {
+        font-size: 11px;
+        font-weight: 700;
+        color: #2563eb;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .section-title {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+      }
+      .section-sub {
+        font-size: 15px;
+        color: #475569;
+        margin-top: 8px;
+        max-width: 440px;
+        line-height: 1.6;
+      }
+      .see-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #2563eb;
+        white-space: nowrap;
+        transition: color 0.2s;
+      }
+      .see-all:hover {
+        color: #4f46e5;
+      }
+      .see-all svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+
+      /* CATEGORIES */
+      .categories {
+        padding: 0 24px 56px;
+      }
+      .cat-grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .cat-card {
+        background: #fff;
+        border-radius: 18px;
+        border: 1.5px solid #e2e8f0;
+        padding: 22px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        cursor: pointer;
+      }
+      .cat-card:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+      }
+      .cat-icon-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+      .cat-icon-wrap svg {
+        width: 22px;
+        height: 22px;
+        transition: transform 0.3s;
+      }
+      .cat-card:hover .cat-icon-wrap svg {
+        transform: scale(1.12);
+      }
+      .cat-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .cat-desc {
+        font-size: 13px;
+        color: #475569;
+        line-height: 1.5;
+        margin-top: 2px;
+      }
+      .cat-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .cat-tag {
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        color: #475569;
+        background: #f1f5f9;
+        border-radius: 5px;
+      }
+      .cat-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 12px;
+        border-top: 1px solid #f1f5f9;
+      }
+      .cat-count {
+        font-size: 11px;
+        font-weight: 500;
+        color: #94a3b8;
+      }
+      .cat-arrow {
+        width: 16px;
+        height: 16px;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+      .cat-card:hover .cat-arrow {
+        opacity: 1;
+        transform: translateX(4px);
+      }
+
+      /* FREELANCERS */
+      .freelancers {
+        padding: 0 24px 56px;
+        background: #f8fafc;
+      }
+      .fl-grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .fl-card {
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s;
+      }
+      .fl-card:hover {
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        transform: translateY(-4px);
+      }
+      .fl-img-wrap {
+        position: relative;
+        height: 160px;
+        overflow: hidden;
+        background: #f1f5f9;
+      }
+      .fl-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .fl-card:hover .fl-img-wrap img {
+        transform: scale(1.06);
+      }
+      .fl-badges {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        gap: 5px;
+      }
+      .fl-badge {
+        padding: 3px 7px;
+        font-size: 10px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .fl-badge svg {
+        width: 10px;
+        height: 10px;
+        fill: white;
+      }
+      .fl-badge.top {
+        background: #f59e0b;
+      }
+      .fl-badge.verified {
+        background: #10b981;
+      }
+      .fl-rate {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 4px 9px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #0f172a;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 7px;
+        border: 1px solid #e2e8f0;
+      }
+      .fl-body {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+      }
+      .fl-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .fl-role {
+        font-size: 13px;
+        font-weight: 600;
+        color: #2563eb;
+        margin-top: 1px;
+      }
+      .fl-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+      }
+      .fl-rating {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .fl-rating svg {
+        width: 13px;
+        height: 13px;
+        fill: #f59e0b;
+      }
+      .fl-rating strong {
+        color: #0f172a;
+      }
+      .fl-rating span {
+        color: #94a3b8;
+      }
+      .fl-location {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        color: #94a3b8;
+      }
+      .fl-location svg {
+        width: 12px;
+        height: 12px;
+        fill: currentColor;
+      }
+      .fl-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 4px;
+      }
+      .fl-skill {
+        padding: 3px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        color: #1d4ed8;
+        background: #eff6ff;
+        border-radius: 5px;
+        border: 1px solid #bfdbfe;
+      }
+      .fl-cta {
+        margin-top: 4px;
+        width: 100%;
+        padding: 9px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #2563eb;
+        background: transparent;
+        border: 1.5px solid #bfdbfe;
+        border-radius: 10px;
+        transition: all 0.2s;
+      }
+      .fl-cta:hover {
+        background: #eff6ff;
+        border-color: #60a5fa;
+      }
+
+      /* AI SECTION */
+      .ai-section {
+        padding: 56px 24px;
+      }
+      .ai-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .ai-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        position: relative;
+      }
+      .ai-blob {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse 70% 70% at 50% 50%,
+          rgba(37, 99, 235, 0.07),
+          transparent 70%
+        );
+        filter: blur(20px);
+      }
+      .ai-card {
+        position: relative;
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        padding: 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transition: all 0.3s;
+      }
+      .ai-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+      .ai-card-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 14px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.2;
+        text-align: center;
+        padding: 4px;
+      }
+      .ai-card-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .ai-card-sub {
+        font-size: 12px;
+        color: #94a3b8;
+        margin-top: 2px;
+      }
+      .ai-pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #34d399;
+        animation: pulse 2s ease-in-out infinite;
+        margin-left: auto;
+        flex-shrink: 0;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+      .ai-right {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .ai-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #2563eb;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .ai-eyebrow svg {
+        width: 13px;
+        height: 13px;
+        fill: currentColor;
+      }
+      .ai-title {
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+      }
+      .ai-title span {
+        color: #2563eb;
+      }
+      .ai-desc {
+        font-size: 15px;
+        color: #475569;
+        line-height: 1.7;
+      }
+      .ai-features {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .ai-feature {
+        display: flex;
+        gap: 14px;
+        padding: 14px;
+        border-radius: 12px;
+        transition: background 0.2s;
+      }
+      .ai-feature:hover {
+        background: #f8fafc;
+      }
+      .ai-feature-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ai-feature-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .ai-feature-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .ai-feature-desc {
+        font-size: 13px;
+        color: #475569;
+        margin-top: 3px;
+        line-height: 1.5;
+      }
+      .ai-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .btn-ai {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 11px 22px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        transition: all 0.2s;
+      }
+      .btn-ai:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      }
+      .btn-ai svg {
+        width: 14px;
+        height: 14px;
+        fill: white;
+      }
+      .btn-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #2563eb;
+        background: none;
+        border: none;
+        transition: color 0.2s;
+      }
+      .btn-link:hover {
+        color: #4f46e5;
+      }
+
+      /* TESTIMONIALS */
+      .testimonials {
+        padding: 56px 24px;
+        background: #f8fafc;
+      }
+      .test-grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .test-card {
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        transition: all 0.3s;
+      }
+      .test-card:hover {
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+      }
+      .test-stars {
+        display: flex;
+        gap: 3px;
+      }
+      .test-stars svg {
+        width: 15px;
+        height: 15px;
+        fill: #f59e0b;
+      }
+      .test-text {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.7;
+        font-style: italic;
+        flex: 1;
+      }
+      .test-tag {
+        align-self: flex-start;
+        padding: 3px 10px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #1d4ed8;
+        background: #eff6ff;
+        border-radius: 5px;
+        border: 1px solid #bfdbfe;
+      }
+      .test-author {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-top: 12px;
+        border-top: 1px solid #f1f5f9;
+      }
+      .test-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #e2e8f0;
+      }
+      .test-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .test-role {
+        font-size: 12px;
+        color: #94a3b8;
+        margin-top: 1px;
+      }
+      .test-trust {
+        max-width: 1280px;
+        margin: 40px auto 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 48px;
+        padding-top: 32px;
+        border-top: 1px solid #e2e8f0;
+      }
+      .trust-item {
+        text-align: center;
+      }
+      .trust-val {
+        font-size: 26px;
+        font-weight: 900;
+        color: #0f172a;
+      }
+      .trust-label {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-top: 4px;
+      }
+
+      /* CTA */
+      .cta-section {
+        padding: 56px 24px;
+      }
+      .cta-box {
+        max-width: 1280px;
+        margin: 0 auto;
+        border-radius: 24px;
+        background: linear-gradient(
+          135deg,
+          #1d4ed8 0%,
+          #2563eb 50%,
+          #4f46e5 100%
+        );
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 16px 60px rgba(37, 99, 235, 0.35);
+        padding: 64px 40px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .cta-circle1 {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.12),
+          transparent 70%
+        );
+        transform: translate(30%, -30%);
+      }
+      .cta-circle2 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(124, 58, 237, 0.3),
+          transparent 70%
+        );
+        transform: translate(-30%, 30%);
+      }
+      .cta-badge {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 18px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+      }
+      .cta-badge svg {
+        width: 14px;
+        height: 14px;
+        fill: white;
+      }
+      .cta-title {
+        position: relative;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 900;
+        color: #fff;
+        max-width: 680px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+      .cta-desc {
+        position: relative;
+        font-size: 16px;
+        color: rgba(219, 234, 254, 0.9);
+        max-width: 520px;
+        line-height: 1.7;
+      }
+      .cta-btns {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+      .btn-cta-white {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 30px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #2563eb;
+        background: #fff;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s;
+      }
+      .btn-cta-white:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+      .btn-cta-white svg {
+        width: 15px;
+        height: 15px;
+        fill: #2563eb;
+      }
+      .btn-cta-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 30px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        border-radius: 12px;
+        transition: all 0.2s;
+      }
+      .btn-cta-outline:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+      }
+      .cta-note {
+        position: relative;
+        font-size: 13px;
+        color: rgba(191, 219, 254, 0.8);
+      }
+
+      /* FOOTER */
+      footer {
+        background: #0f172a;
+        color: #fff;
+        padding: 56px 24px 28px;
+      }
+      .foot-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+      .foot-top {
+        display: grid;
+        grid-template-columns: 1.4fr repeat(4, 1fr);
+        gap: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .foot-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .foot-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .foot-logo-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .foot-logo-icon svg {
+        width: 14px;
+        height: 14px;
+        fill: white;
+      }
+      .foot-logo span {
+        color: #60a5fa;
+      }
+      .foot-tagline {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.6;
+        max-width: 220px;
+      }
+      .foot-socials {
+        display: flex;
+        gap: 8px;
+      }
+      .social-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .social-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .social-btn svg {
+        width: 15px;
+        height: 15px;
+        fill: white;
+      }
+      .foot-col h4 {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 16px;
+      }
+      .foot-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .foot-col a {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.48);
+        transition: color 0.2s;
+      }
+      .foot-col a:hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .foot-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding-top: 20px;
+      }
+      .foot-copy {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .foot-legal {
+        display: flex;
+        gap: 16px;
+      }
+      .foot-legal a {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.35);
+        transition: color 0.2s;
+      }
+      .foot-legal a:hover {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .cat-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .fl-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .test-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .ai-inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .foot-top {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-auth {
+          display: none;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        .hero {
+          padding: 90px 16px 56px;
+        }
+        .search-inner {
+          flex-direction: column;
+        }
+        .btn-search {
+          width: 100%;
+          justify-content: center;
+        }
+        .stats {
+          padding: 20px 16px 40px;
+        }
+        .categories,
+        .freelancers,
+        .ai-section,
+        .testimonials,
+        .cta-section {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .fl-grid,
+        .test-grid,
+        .stats-grid,
+        .cat-grid {
+          grid-template-columns: 1fr;
+        }
+        .cta-box {
+          padding: 44px 20px;
+        }
+        .foot-top {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .ai-inner {
+          grid-template-columns: 1fr;
+        }
+        .ai-cards {
+          order: 2;
+        }
+        .ai-right {
+          order: 1;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero-btns {
+          flex-direction: column;
+          align-items: center;
+        }
+        .btn-hero-primary,
+        .btn-hero-secondary {
+          width: 100%;
+          justify-content: center;
+        }
+        .cta-btns {
+          flex-direction: column;
+        }
+        .btn-cta-white,
+        .btn-cta-outline {
+          width: 100%;
+          justify-content: center;
+        }
+        .foot-top {
+          grid-template-columns: 1fr;
+        }
+        .trust-item:last-child {
+          display: none;
+        }
+      }
+    </style>
+
+    <h2 class="sr-only">
+      FreelanceHub – Find the perfect freelancer for any project
+    </h2>
+
+    <!-- NAV -->
+    <nav id="mainNav">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-icon">
+            <svg viewBox="0 0 16 16">
+              <path d="M8 1l2 5h5l-4 3 1.5 5L8 11l-4.5 3L5 9 1 6h5z" />
+            </svg>
+          </div>
+          Freelance<span>Hub</span>
+        </a>
+        <div class="nav-links">
+          <a href="#" class="active">Explore</a>
+          <a href="#">How it Works</a>
+          <a href="#">Pricing</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="nav-auth">
+          <button class="btn-ghost">Sign In</button>
+          <button class="btn-primary">Get Started</button>
+        </div>
+        <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <line x1="3" y1="7" x2="19" y2="7" />
+            <line x1="3" y1="11" x2="19" y2="11" />
+            <line x1="3" y1="15" x2="19" y2="15" />
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#" class="active">Explore</a>
+        <a href="#">How it Works</a>
+        <a href="#">Pricing</a>
+        <a href="#">Blog</a>
+        <button
+          class="btn-primary"
+          style="width: 100%; margin-top: 10px; padding: 12px"
+        >
+          Get Started
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-blob1" aria-hidden="true"></div>
+      <div class="hero-blob2" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="badge">
+          <svg viewBox="0 0 16 16">
+            <path d="M8 1l2 5h5l-4 3 1.5 5L8 11l-4.5 3L5 9 1 6h5z" />
+          </svg>
+          Trusted by 50,000+ businesses worldwide
+        </div>
+        <h1>
+          Find the
+          <span class="hl"
+            >Perfect Freelancer
+            <svg
+              class="underline-svg"
+              viewBox="0 0 340 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 10 Q85 2 170 10 Q255 18 338 10"
+                stroke="#60a5fa"
+                stroke-width="3.5"
+                stroke-linecap="round"
+              />
+            </svg> </span
+          ><br />for Any Project
+        </h1>
+        <p class="hero-desc">
+          Connect with talented professionals across 500+ skill categories. Post
+          a project in minutes and receive proposals from verified experts
+          today.
+        </p>
+        <div class="hero-btns">
+          <button class="btn-hero-primary">
+            Find Talent Now
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+              <path
+                d="M3 7.5h9M8.5 4l3.5 3.5L8.5 11"
+                stroke="white"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button class="btn-hero-secondary">
+            <div class="play-circle">
+              <svg viewBox="0 0 12 12"><polygon points="3,1 11,6 3,11" /></svg>
+            </div>
+            Watch Demo
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="search-wrap">
+          <div class="search-inner">
+            <div class="search-field" style="flex: 2; min-width: 160px">
+              <svg viewBox="0 0 16 16">
+                <path
+                  d="M11 11l4 4M7 13A6 6 0 107 1a6 6 0 000 12z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search skills or services…"
+                aria-label="Search skills"
+              />
+            </div>
+            <div class="search-field" style="flex: 1; min-width: 120px">
+              <svg viewBox="0 0 16 16">
+                <path
+                  d="M8 1C5.8 1 4 2.8 4 5c0 3.3 4 10 4 10s4-6.7 4-10c0-2.2-1.8-4-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  fill="currentColor"
+                />
+              </svg>
+              <input type="text" placeholder="Location" aria-label="Location" />
+            </div>
+            <div class="search-field" style="flex: 1; min-width: 130px">
+              <svg viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M2 5h12M4 9h8M6 13h4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <select aria-label="Category">
+                <option>All Categories</option>
+                <option>Design</option>
+                <option>Development</option>
+                <option>Marketing</option>
+                <option>Writing</option>
+                <option>Video & Animation</option>
+              </select>
+            </div>
+            <button class="btn-search">
+              <svg viewBox="0 0 16 16">
+                <path
+                  d="M11 11l4 4M7 13A6 6 0 107 1a6 6 0 000 12z"
+                  stroke="white"
+                  stroke-width="1.8"
+                  fill="none"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Search
+            </button>
+          </div>
+        </div>
+
+        <div class="trending">
+          <span class="trending-label">Trending:</span>
+          <a href="#" class="tag">UI Design</a>
+          <a href="#" class="tag">React Dev</a>
+          <a href="#" class="tag">SEO Writing</a>
+          <a href="#" class="tag">Video Edit</a>
+          <a href="#" class="tag">Data Analysis</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #eff6ff">
+            <svg viewBox="0 0 20 20" fill="#2563eb">
+              <path
+                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a5.97 5.97 0 00-.75-2.906A3.005 3.005 0 0119 15v1h-3zM4.75 14.094A5.97 5.97 0 004 17v1H1v-1a3 3 0 013.75-2.906z"
+              />
+            </svg>
+          </div>
+          <div>
+            <div class="stat-val">250K+</div>
+            <div class="stat-name">Active Freelancers</div>
+            <div class="stat-desc">Skilled professionals ready to work</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #faf5ff">
+            <svg viewBox="0 0 20 20" fill="#7c3aed">
+              <path
+                d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+              />
+              <path
+                d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"
+              />
+            </svg>
+          </div>
+          <div>
+            <div class="stat-val">1.2M</div>
+            <div class="stat-name">Projects Completed</div>
+            <div class="stat-desc">Successfully delivered worldwide</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #fefce8">
+            <svg viewBox="0 0 20 20" fill="#f59e0b">
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              />
+            </svg>
+          </div>
+          <div>
+            <div class="stat-val">4.9/5</div>
+            <div class="stat-name">Average Rating</div>
+            <div class="stat-desc">Based on verified client reviews</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #f0fdf4">
+            <svg viewBox="0 0 20 20" fill="#10b981">
+              <path
+                fill-rule="evenodd"
+                d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div>
+            <div class="stat-val">98%</div>
+            <div class="stat-name">Satisfaction Rate</div>
+            <div class="stat-desc">Clients who recommend us</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories">
+      <div style="max-width: 1280px; margin: 0 auto">
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">Browse by category</div>
+            <h2 class="section-title">Explore Top Categories</h2>
+          </div>
+          <a href="#" class="see-all"
+            >View all categories
+            <svg viewBox="0 0 14 14">
+              <path
+                d="M3 7h8M7 3l4 4-4 4"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+          ></a>
+        </div>
+        <div class="cat-grid">
+          <a href="#" class="cat-card">
+            <div class="cat-icon-wrap" style="background: #eff6ff">
+              <svg
+                viewBox="0 0 22 22"
+                fill="none"
+                stroke="#2563eb"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              >
+                <rect x="3" y="3" width="7" height="4" rx="1" />
+                <rect x="12" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="10" width="7" height="9" rx="1" />
+                <rect x="12" y="13" width="7" height="6" rx="1" />
+              </svg>
+            </div>
+            <div>
+              <div class="cat-title">Development</div>
+              <div class="cat-desc">Web, mobile, and software engineers</div>
+            </div>
+            <div class="cat-tags">
+              <span class="cat-tag">React</span
+              ><span class="cat-tag">Node.js</span
+              ><span class="cat-tag">Python</span
+              ><span class="cat-tag">iOS</span>
+            </div>
+            <div class="cat-footer">
+              <span class="cat-count">48,200+ freelancers</span>
+              <svg
+                class="cat-arrow"
+                fill="none"
+                viewBox="0 0 16 16"
+                stroke="#2563eb"
+                stroke-width="1.8"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </a>
+          <a href="#" class="cat-card">
+            <div class="cat-icon-wrap" style="background: #faf5ff">
+              <svg
+                viewBox="0 0 22 22"
+                fill="none"
+                stroke="#7c3aed"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              >
+                <circle cx="11" cy="8" r="4" />
+                <path d="M4 19c0-3.87 3.13-7 7-7h0c3.87 0 7 3.13 7 7" />
+                <path d="M17 4l1 1-6 6" />
+              </svg>
+            </div>
+            <div>
+              <div class="cat-title">Design & Creative</div>
+              <div class="cat-desc">UI/UX, branding, and illustration</div>
+            </div>
+            <div class="cat-tags">
+              <span class="cat-tag">Figma</span
+              ><span class="cat-tag">Branding</span
+              ><span class="cat-tag">UI/UX</span
+              ><span class="cat-tag">Logo</span>
+            </div>
+            <div class="cat-footer">
+              <span class="cat-count">32,500+ freelancers</span>
+              <svg
+                class="cat-arrow"
+                fill="none"
+                viewBox="0 0 16 16"
+                stroke="#7c3aed"
+                stroke-width="1.8"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </a>
+          <a href="#" class="cat-card">
+            <div class="cat-icon-wrap" style="background: #f0fdf4">
+              <svg
+                viewBox="0 0 22 22"
+                fill="none"
+                stroke="#10b981"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              >
+                <path
+                  d="M17 4H5C3.9 4 3 4.9 3 6v14l4-4h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"
+                />
+                <path d="M7 9h8M7 13h5" />
+              </svg>
+            </div>
+            <div>
+              <div class="cat-title">Writing & Content</div>
+              <div class="cat-desc">Copywriters, bloggers, and editors</div>
+            </div>
+            <div class="cat-tags">
+              <span class="cat-tag">Blog</span
+              ><span class="cat-tag">Copywriting</span
+              ><span class="cat-tag">SEO</span
+              ><span class="cat-tag">Technical</span>
+            </div>
+            <div class="cat-footer">
+              <span class="cat-count">27,100+ freelancers</span>
+              <svg
+                class="cat-arrow"
+                fill="none"
+                viewBox="0 0 16 16"
+                stroke="#10b981"
+                stroke-width="1.8"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </a>
+          <a href="#" class="cat-card">
+            <div class="cat-icon-wrap" style="background: #fff7ed">
+              <svg
+                viewBox="0 0 22 22"
+                fill="none"
+                stroke="#f97316"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              >
+                <path
+                  d="M11 4V7M11 11v.5M4 7l2.5 2M18 7l-2.5 2M6.5 15.5l2-1.5M15.5 15.5l-2-1.5"
+                />
+                <circle cx="11" cy="11" r="4" />
+              </svg>
+            </div>
+            <div>
+              <div class="cat-title">Digital Marketing</div>
+              <div class="cat-desc">SEO, ads, and social media experts</div>
+            </div>
+            <div class="cat-tags">
+              <span class="cat-tag">SEO</span><span class="cat-tag">PPC</span
+              ><span class="cat-tag">Social</span
+              ><span class="cat-tag">Email</span>
+            </div>
+            <div class="cat-footer">
+              <span class="cat-count">19,800+ freelancers</span>
+              <svg
+                class="cat-arrow"
+                fill="none"
+                viewBox="0 0 16 16"
+                stroke="#f97316"
+                stroke-width="1.8"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED FREELANCERS -->
+    <section
+      class="freelancers"
+      style="padding-top: 56px; padding-bottom: 64px"
+    >
+      <div style="max-width: 1280px; margin: 0 auto">
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">Top talent</div>
+            <h2 class="section-title">Featured Freelancers</h2>
+            <p class="section-sub">
+              Hand-picked professionals with proven track records.
+            </p>
+          </div>
+          <a href="#" class="see-all"
+            >Browse all freelancers
+            <svg viewBox="0 0 14 14">
+              <path
+                d="M3 7h8M7 3l4 4-4 4"
+                stroke="currentColor"
+                stroke-width="1.6"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+          ></a>
+        </div>
+        <div class="fl-grid">
+          <div class="fl-card">
+            <div class="fl-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop&auto=format"
+                alt="Sarah Chen – Senior UI/UX Designer"
+                loading="lazy"
+              />
+              <div class="fl-badges">
+                <span class="fl-badge top"
+                  ><svg viewBox="0 0 10 10">
+                    <polygon
+                      points="5,0 6.5,3.5 10,4 7,7 7.5,10 5,8.5 2.5,10 3,7 0,4 3.5,3.5"
+                    /></svg
+                  >Top Rated</span
+                >
+                <span class="fl-badge verified"
+                  ><svg viewBox="0 0 10 10">
+                    <path
+                      d="M5 0L9 2v4L5 10 1 6V2z"
+                      fill="none"
+                      stroke="white"
+                      stroke-width=".8"
+                    />
+                    <path
+                      d="M3 5l1.5 1.5L7 3"
+                      stroke="white"
+                      stroke-width=".9"
+                      fill="none"
+                      stroke-linecap="round"
+                    /></svg
+                  >Verified</span
+                >
+              </div>
+              <div class="fl-rate">$95/hr</div>
+            </div>
+            <div class="fl-body">
+              <div>
+                <div class="fl-name">Sarah Chen</div>
+                <div class="fl-role">Senior UI/UX Designer</div>
+              </div>
+              <div class="fl-meta">
+                <div class="fl-rating">
+                  <svg viewBox="0 0 10 10">
+                    <polygon
+                      points="5,0 6.5,3.5 10,4 7,7 7.5,10 5,8.5 2.5,10 3,7 0,4 3.5,3.5"
+                    /></svg
+                  ><strong>4.9</strong><span>(312)</span>
+                </div>
+                <div class="fl-location">
+                  <svg viewBox="0 0 10 10">
+                    <path
+                      d="M5 0C3.3 0 2 1.3 2 3c0 2.5 3 7 3 7s3-4.5 3-7c0-1.7-1.3-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z"
+                    /></svg
+                  >San Francisco, CA
+                </div>
+              </div>
+              <div class="fl-skills">
+                <span class="fl-skill">Figma</span
+                ><span class="fl-skill">Prototyping</span
+                ><span class="fl-skill">User Research</span>
+              </div>
+              <button class="fl-cta">View Profile</button>
+            </div>
+          </div>
+          <div class="fl-card">
+            <div class="fl-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&auto=format"
+                alt="Marcus Johnson – Full-Stack Developer"
+                loading="lazy"
+              />
+              <div class="fl-badges">
+                <span class="fl-badge verified"
+                  ><svg viewBox="0 0 10 10">
+                    <path
+                      d="M5 0L9 2v4L5 10 1 6V2z"
+                      fill="none"
+                      stroke="white"
+                      stroke-width=".8"
+                    />
+                    <path
+                      d="M3 5l1.5 1.5L7 3"
+                      stroke="white"
+                      stroke-width=".9"
+                      fill="none"
+                      stroke-linecap="round"
+                    /></svg
+                  >Verified</span
+                >
+              </div>
+              <div class="fl-rate">$110/hr</div>
+            </div>
+            <div class="fl-body">
+              <div>
+                <div class="fl-name">Marcus Johnson</div>
+                <div class="fl-role">Full-Stack Developer</div>
+              </div>
+              <div class="fl-meta">
+                <div class="fl-rating">
+                  <svg viewBox="0 0 10 10">
+                    <polygon
+                      points="5,0 6.5,3.5 10,4 7,7 7.5,10 5,8.5 2.5,10 3,7 0,4 3.5,3.5"
+                      fill="#f59e0b"
+                    /></svg
+                  ><strong>4.8</strong><span>(247)</span>
+                </div>
+                <div class="fl-location">
+                  <svg viewBox="0 0 10 10">
+                    <path
+                      d="M5 0C3.3 0 2 1.3 2 3c0 2.5 3 7 3 7s3-4.5 3-7c0-1.7-1.3-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z"
+                    /></svg
+                  >Austin, TX
+                </div>
+              </div>
+              <div class="fl-skills">
+                <span class="fl-skill">React</span
+                ><span class="fl-skill">Node.js</span
+                ><span class="fl-skill">TypeScript</span
+                ><span class="fl-skill">AWS</span>
+              </div>
+              <button class="fl-cta">View Profile</button>
+            </div>
+          </div>
+          <div class="fl-card">
+            <div class="fl-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=300&fit=crop&auto=format"
+                alt="Priya Sharma – Content & SEO Strategist"
+                loading="lazy"
+              />
+              <div class="fl-badges">
+                <span class="fl-badge top"
+                  ><svg viewBox="0 0 10 10">
+                    <polygon
+                      points="5,0 6.5,3.5 10,4 7,7 7.5,10 5,8.5 2.5,10 3,7 0,4 3.5,3.5"
+                    /></svg
+                  >Top Rated</span
+                >
+                <span class="fl-badge verified"
+                  ><svg viewBox="0 0 10 10">
+                    <path
+                      d="M5 0L9 2v4L5 10 1 6V2z"
+                      fill="none"
+                      stroke="white"
+                      stroke-width=".8"
+                    />
+                    <path
+                      d="M3 5l1.5 1.5L7 3"
+                      stroke="white"
+                      stroke-width=".9"
+                      fill="none"
+                      stroke-linecap="round"
+                    /></svg
+                  >Verified</span
+                >
+              </div>
+              <div class="fl-rate">$75/hr</div>
+            </div>
+            <div class="fl-body">
+              <div>
+                <div class="fl-name">Priya Sharma</div>
+                <div class="fl-role">Content & SEO Strategist</div>
+              </div>
+              <div class="fl-meta">
+                <div class="fl-rating">
+                  <svg viewBox="0 0 10 10">
+                    <polygon
+                      points="5,0 6.5,3.5 10,4 7,7 7.5,10 5,8.5 2.5,10 3,7 0,4 3.5,3.5"
+                      fill="#f59e0b"
+                    /></svg
+                  ><strong>4.9</strong><span>(189)</span>
+                </div>
+                <div class="fl-location">
+                  <svg viewBox="0 0 10 10">
+                    <path
+                      d="M5 0C3.3 0 2 1.3 2 3c0 2.5 3 7 3 7s3-4.5 3-7c0-1.7-1.3-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z"
+                    /></svg
+                  >New York, NY
+                </div>
+              </div>
+              <div class="fl-skills">
+                <span class="fl-skill">SEO</span
+                ><span class="fl-skill">Copywriting</span
+                ><span class="fl-skill">Analytics</span>
+              </div>
+              <button class="fl-cta">View Profile</button>
+            </div>
+          </div>
+          <div class="fl-card">
+            <div class="fl-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=300&fit=crop&auto=format"
+                alt="Alex Rivera – Motion Designer"
+                loading="lazy"
+              />
+              <div class="fl-badges"></div>
+              <div class="fl-rate">$85/hr</div>
+            </div>
+            <div class="fl-body">
+              <div>
+                <div class="fl-name">Alex Rivera</div>
+                <div class="fl-role">Motion Designer</div>
+              </div>
+              <div class="fl-meta">
+                <div class="fl-rating">
+                  <svg viewBox="0 0 10 10">
+                    <polygon
+                      points="5,0 6.5,3.5 10,4 7,7 7.5,10 5,8.5 2.5,10 3,7 0,4 3.5,3.5"
+                      fill="#f59e0b"
+                    /></svg
+                  ><strong>4.7</strong><span>(143)</span>
+                </div>
+                <div class="fl-location">
+                  <svg viewBox="0 0 10 10">
+                    <path
+                      d="M5 0C3.3 0 2 1.3 2 3c0 2.5 3 7 3 7s3-4.5 3-7c0-1.7-1.3-3-3-3zm0 4a1 1 0 110-2 1 1 0 010 2z"
+                    /></svg
+                  >Los Angeles, CA
+                </div>
+              </div>
+              <div class="fl-skills">
+                <span class="fl-skill">After Effects</span
+                ><span class="fl-skill">Lottie</span
+                ><span class="fl-skill">Cinema 4D</span>
+              </div>
+              <button class="fl-cta">View Profile</button>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 36px">
+          <button
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              padding: 12px 28px;
+              font-size: 14px;
+              font-weight: 600;
+              color: #0f172a;
+              background: #fff;
+              border: 1.5px solid #e2e8f0;
+              border-radius: 12px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+              transition: all 0.2s;
+              cursor: pointer;
+            "
+            onmouseover="
+              this.style.boxShadow = '0 6px 18px rgba(0,0,0,.1)';
+              this.style.transform = 'translateY(-2px)';
+            "
+            onmouseout="
+              this.style.boxShadow = '0 2px 8px rgba(0,0,0,.06)';
+              this.style.transform = 'translateY(0)';
+            "
+          >
+            Explore 250,000+ Freelancers
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+              <path
+                d="M3 7.5h9M8.5 4l3.5 3.5L8.5 11"
+                stroke="#0f172a"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI SECTION -->
+    <section class="ai-section">
+      <div class="ai-inner">
+        <div class="ai-cards">
+          <div class="ai-blob" aria-hidden="true"></div>
+          <div class="ai-card">
+            <div
+              class="ai-card-icon"
+              style="background: linear-gradient(135deg, #2563eb, #4f46e5)"
+            >
+              97%
+            </div>
+            <div>
+              <div class="ai-card-label">AI Match Score</div>
+              <div class="ai-card-sub">Best fit for your project</div>
+            </div>
+            <div class="ai-pulse"></div>
+          </div>
+          <div class="ai-card">
+            <div
+              class="ai-card-icon"
+              style="background: linear-gradient(135deg, #10b981, #0891b2)"
+            >
+              &lt;2hrs
+            </div>
+            <div>
+              <div class="ai-card-label">Average Response</div>
+              <div class="ai-card-sub">Top freelancers reply fast</div>
+            </div>
+            <div class="ai-pulse" style="background: #60a5fa"></div>
+          </div>
+          <div class="ai-card">
+            <div
+              class="ai-card-icon"
+              style="background: linear-gradient(135deg, #7c3aed, #a855f7)"
+            >
+              15hrs
+            </div>
+            <div>
+              <div class="ai-card-label">Time Saved</div>
+              <div class="ai-card-sub">Compared to traditional hiring</div>
+            </div>
+            <div class="ai-pulse" style="background: #a78bfa"></div>
+          </div>
+        </div>
+        <div class="ai-right">
+          <div>
+            <div class="ai-eyebrow">
+              <svg viewBox="0 0 14 14">
+                <path
+                  d="M7 1l1.5 4h4L9 7l1.2 4L7 9 3.8 11 5 7 1.5 5h4z"
+                  fill="currentColor"
+                /></svg
+              >Powered by AI
+            </div>
+            <h2 class="ai-title" style="margin-top: 10px">
+              Smarter Hiring with <span>Artificial Intelligence</span>
+            </h2>
+            <p class="ai-desc" style="margin-top: 14px">
+              Our AI understands your project needs better than any form ever
+              could. Describe what you're building and get matched with expert
+              freelancers who have the exact skills you need.
+            </p>
+          </div>
+          <div class="ai-features">
+            <div class="ai-feature">
+              <div class="ai-feature-icon" style="background: #eff6ff">
+                <svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="#2563eb"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                >
+                  <path
+                    d="M9 2v4M9 12v4M2 9h4M12 9h4M4.3 4.3l2.8 2.8M10.9 10.9l2.8 2.8M13.7 4.3l-2.8 2.8M7.1 10.9l-2.8 2.8"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div class="ai-feature-title">Smart Matching</div>
+                <div class="ai-feature-desc">
+                  AI analyzes your project requirements and matches you with the
+                  most qualified freelancers in seconds.
+                </div>
+              </div>
+            </div>
+            <div class="ai-feature">
+              <div class="ai-feature-icon" style="background: #f0fdf4">
+                <svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="#10b981"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                >
+                  <path d="M9 1L14 3.5v5L9 17 4 8.5V3.5z" />
+                  <path d="M6 8l2 2 4-4" />
+                </svg>
+              </div>
+              <div>
+                <div class="ai-feature-title">Verified talent</div>
+                <div class="ai-feature-desc">
+                  Every freelancer goes through skill assessments and identity
+                  verification before joining the platform.
+                </div>
+              </div>
+            </div>
+            <div class="ai-feature">
+              <div class="ai-feature-icon" style="background: #faf5ff">
+                <svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="#7c3aed"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                >
+                  <circle cx="9" cy="9" r="7" />
+                  <path d="M9 5v4l3 2" />
+                </svg>
+              </div>
+              <div>
+                <div class="ai-feature-title">Real-time insights</div>
+                <div class="ai-feature-desc">
+                  Live project tracking, progress reports, and performance
+                  analytics all in one dashboard.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ai-actions">
+            <button class="btn-ai">
+              <svg viewBox="0 0 14 14">
+                <path
+                  d="M7 1l1.5 4h4L9 7l1.2 4L7 9 3.8 11 5 7 1.5 5h4z"
+                  fill="white"
+                />
+              </svg>
+              Try AI Matching
+            </button>
+            <button class="btn-link">Learn how it works →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div style="max-width: 1280px; margin: 0 auto">
+        <div style="text-align: center; margin-bottom: 44px">
+          <div class="section-eyebrow">Client success stories</div>
+          <h2 class="section-title" style="margin-top: 6px">
+            What Our Clients Say
+          </h2>
+          <p style="font-size: 15px; color: #475569; margin-top: 10px">
+            Join thousands of businesses that found their perfect freelancer.
+          </p>
+        </div>
+        <div class="test-grid">
+          <div class="test-card">
+            <div class="test-stars">
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+            </div>
+            <p class="test-text">
+              "FreelanceHub transformed how we source design talent. We went
+              from weeks of interviews to having a world-class designer working
+              on our app within 48 hours. The quality is consistently
+              outstanding."
+            </p>
+            <span class="test-tag">Product Design</span>
+            <div class="test-author">
+              <img
+                class="test-avatar"
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&auto=format"
+                alt="Jennifer Walsh"
+                loading="lazy"
+              />
+              <div>
+                <div class="test-name">Jennifer Walsh</div>
+                <div class="test-role">Product Manager · TechNova</div>
+              </div>
+            </div>
+          </div>
+          <div class="test-card">
+            <div class="test-stars">
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+            </div>
+            <p class="test-text">
+              "As a startup founder, I needed reliable development help without
+              the overhead of full-time hires. FreelanceHub gave me access to
+              senior engineers who hit the ground running immediately."
+            </p>
+            <span class="test-tag">Web Development</span>
+            <div class="test-author">
+              <img
+                class="test-avatar"
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&auto=format"
+                alt="David Kim"
+                loading="lazy"
+              />
+              <div>
+                <div class="test-name">David Kim</div>
+                <div class="test-role">Founder & CEO · LaunchPad</div>
+              </div>
+            </div>
+          </div>
+          <div class="test-card">
+            <div class="test-stars">
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+              <svg viewBox="0 0 15 15">
+                <polygon
+                  points="7.5,0 9.5,5.5 15,6 11,9.5 12.5,15 7.5,12 2.5,15 4,9.5 0,6 5.5,5.5"
+                  fill="#f59e0b"
+                />
+              </svg>
+            </div>
+            <p class="test-text">
+              "The AI matching is genuinely impressive. I described our content
+              needs and was connected with writers who understood our brand
+              voice immediately. Saved us months of trial and error."
+            </p>
+            <span class="test-tag">Content Strategy</span>
+            <div class="test-author">
+              <img
+                class="test-avatar"
+                src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&auto=format"
+                alt="Maria Santos"
+                loading="lazy"
+              />
+              <div>
+                <div class="test-name">Maria Santos</div>
+                <div class="test-role">Marketing Director · GrowthCo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="test-trust">
+          <div class="trust-item">
+            <div class="trust-val">4.9/5</div>
+            <div class="trust-label">Average rating</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-val">98%</div>
+            <div class="trust-label">Would recommend</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-val">50K+</div>
+            <div class="trust-label">Happy clients</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-box">
+        <div class="cta-circle1" aria-hidden="true"></div>
+        <div class="cta-circle2" aria-hidden="true"></div>
+        <div class="cta-badge">
+          <svg width="14" height="14" viewBox="0 0 14 14">
+            <path
+              d="M7 1l1.5 4h4L9 7l1.2 4L7 9 3.8 11 5 7 1.5 5h4z"
+              fill="white"
+            />
+          </svg>
+          No subscription required
+        </div>
+        <h2 class="cta-title">Ready to Find Your Perfect Freelancer?</h2>
+        <p class="cta-desc">
+          Post your project for free and receive proposals from qualified
+          freelancers within hours. No commitment, no hidden fees.
+        </p>
+        <div class="cta-btns">
+          <button class="btn-cta-white">
+            Post a Project – It's Free
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+              <path
+                d="M3 7.5h9M8.5 4l3.5 3.5L8.5 11"
+                stroke="#2563eb"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button class="btn-cta-outline">Browse Freelancers</button>
+        </div>
+        <p class="cta-note">
+          Trusted by 50,000+ businesses · Secure payments · 24/7 support
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="foot-inner">
+        <div class="foot-top">
+          <div class="foot-brand">
+            <a href="#" class="foot-logo">
+              <div class="foot-logo-icon">
+                <svg width="14" height="14" viewBox="0 0 14 14">
+                  <path
+                    d="M7 1l1.5 4h4L9 7l1.2 4L7 9 3.8 11 5 7 1.5 5h4z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+              Freelance<span>Hub</span>
+            </a>
+            <p class="foot-tagline">
+              The smartest way to hire freelancers with AI-powered talent
+              matching.
+            </p>
+            <div class="foot-socials">
+              <a href="#" class="social-btn" aria-label="Twitter"
+                ><svg viewBox="0 0 15 15">
+                  <path
+                    d="M13.5 1L9 6.5 14 14H10L7 9.5 3.5 14H0.5L5.5 8 0 1H4.5L7 5.5 10.5 1H13.5Z"
+                    fill="white"
+                  /></svg
+              ></a>
+              <a href="#" class="social-btn" aria-label="LinkedIn"
+                ><svg viewBox="0 0 15 15">
+                  <path
+                    d="M2 3.5A1.5 1.5 0 103.5 2 1.5 1.5 0 002 3.5zM2 5.5h3V13H2zM5.5 5.5h2.8v1h.05A3 3 0 0111 5.2c3.2 0 3.8 2.1 3.8 4.8V13h-3v-2.5c0-1.5 0-3.5-2.1-3.5S7.3 8.5 7.3 10.3V13H5.5V5.5z"
+                    fill="white"
+                  /></svg
+              ></a>
+              <a href="#" class="social-btn" aria-label="GitHub"
+                ><svg viewBox="0 0 15 15">
+                  <path
+                    fill="white"
+                    fill-rule="evenodd"
+                    d="M7.5 0C3.35 0 0 3.35 0 7.5c0 3.31 2.15 6.12 5.13 7.12.37.07.5-.16.5-.37v-1.3c-2.1.46-2.54-.9-2.54-.9-.34-.87-.83-1.1-.83-1.1-.68-.47.05-.46.05-.46.75.05 1.15.77 1.15.77.67 1.15 1.75.82 2.18.62.07-.48.26-.82.47-1-1.67-.19-3.43-.84-3.43-3.72 0-.82.29-1.49.77-2.02-.08-.2-.34-1 .07-2.07 0 0 .63-.2 2.06.77a7.2 7.2 0 015.62 0c1.43-.97 2.06-.77 2.06-.77.41 1.07.15 1.87.07 2.07.48.53.77 1.2.77 2.02 0 2.89-1.76 3.52-3.44 3.71.27.23.51.69.51 1.39v2.07c0 .2.13.44.51.37C12.85 13.62 15 10.8 15 7.5 15 3.35 11.65 0 7.5 0z"
+                    clip-rule="evenodd"
+                  /></svg
+              ></a>
+              <a href="#" class="social-btn" aria-label="Instagram"
+                ><svg
+                  viewBox="0 0 15 15"
+                  fill="none"
+                  stroke="white"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                >
+                  <rect x="2" y="2" width="11" height="11" rx="3" />
+                  <circle cx="7.5" cy="7.5" r="2.5" />
+                  <circle
+                    cx="11"
+                    cy="4"
+                    r=".3"
+                    fill="white"
+                    stroke="none"
+                  /></svg
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="#">Find Freelancers</a></li>
+              <li><a href="#">Post a Project</a></li>
+              <li><a href="#">How it Works</a></li>
+              <li><a href="#">AI Matching</a></li>
+              <li><a href="#">Pricing</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Freelancers</h4>
+            <ul>
+              <li><a href="#">Join as Freelancer</a></li>
+              <li><a href="#">Skill Assessments</a></li>
+              <li><a href="#">Resources</a></li>
+              <li><a href="#">Success Stories</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Press Kit</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Trust & Safety</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <p class="foot-copy">
+            © 2026 FreelanceHub, Inc. All rights reserved.
+          </p>
+          <div class="foot-legal">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cookie Settings</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const nav = document.getElementById("mainNav");
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 12);
+        },
+        { passive: true },
+      );
+
+      hamburger.addEventListener("click", () => {
+        const open = mobileMenu.classList.toggle("open");
+        hamburger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        hamburger.innerHTML = open
+          ? '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="17" y2="17"/><line x1="17" y1="5" x2="5" y2="17"/></svg>'
+          : '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="19" y2="7"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="15" x2="19" y2="15"/></svg>';
+      });
+    </script>
+  </head>
+</html>

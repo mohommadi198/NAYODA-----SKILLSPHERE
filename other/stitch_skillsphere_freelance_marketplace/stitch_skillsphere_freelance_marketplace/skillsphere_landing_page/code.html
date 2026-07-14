@@ -1,0 +1,1093 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkillSphere | Hyperlocal Freelance Marketplace</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(226, 232, 240, 0.5);
+      }
+      .hero-gradient {
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(55, 85, 195, 0.05) 0%,
+          rgba(248, 249, 255, 1) 100%
+        );
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#fffbff",
+              "on-secondary-fixed": "#07006c",
+              "surface-container-low": "#eff4ff",
+              tertiary: "#003853",
+              "tertiary-fixed": "#c9e6ff",
+              "on-error-container": "#93000a",
+              "surface-container-high": "#dce9ff",
+              "on-primary-fixed-variant": "#173bab",
+              "surface-container": "#e5eeff",
+              "inverse-on-surface": "#eaf1ff",
+              "surface-bright": "#f8f9ff",
+              background: "#f8f9ff",
+              "on-tertiary-fixed": "#001e2f",
+              "error-container": "#ffdad6",
+              "on-tertiary": "#ffffff",
+              "on-background": "#0b1c30",
+              surface: "#f8f9ff",
+              "outline-variant": "#c4c5d5",
+              "inverse-surface": "#213145",
+              "surface-dim": "#cbdbf5",
+              "surface-container-lowest": "#ffffff",
+              error: "#ba1a1a",
+              primary: "#00288e",
+              secondary: "#4648d4",
+              "secondary-fixed-dim": "#c0c1ff",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-surface-variant": "#444653",
+              "primary-fixed": "#dde1ff",
+              "surface-tint": "#3755c3",
+              outline: "#757684",
+              "tertiary-container": "#005074",
+              "on-tertiary-fixed-variant": "#004c6e",
+              "surface-container-highest": "#d3e4fe",
+              "on-primary-fixed": "#001453",
+              "primary-fixed-dim": "#b8c4ff",
+              "tertiary-fixed-dim": "#89ceff",
+              "on-secondary-fixed-variant": "#2f2ebe",
+              "secondary-container": "#6063ee",
+              "primary-container": "#1e40af",
+              "on-primary-container": "#a8b8ff",
+              "on-tertiary-container": "#68c4ff",
+              "inverse-primary": "#b8c4ff",
+              "on-surface": "#0b1c30",
+              "on-error": "#ffffff",
+              "surface-variant": "#d3e4fe",
+              "secondary-fixed": "#e1e0ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              md: "24px",
+              base: "8px",
+              xs: "4px",
+              xl: "64px",
+              gutter: "24px",
+              sm: "12px",
+              lg: "40px",
+              "container-max": "1280px",
+            },
+            fontFamily: {
+              "display-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "body-md": ["Inter"],
+              "label-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "display-lg-mobile": ["Inter"],
+            },
+            fontSize: {
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": [
+                "16px",
+                {
+                  lineHeight: "24px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "label-sm": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  
+  <body
+    class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden"
+  >
+    <!-- TopNavBar -->
+    <nav
+      class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30 shadow-sm"
+    >
+      <div
+        class="flex justify-between items-center h-16 px-6 md:px-10 max-w-container-max mx-auto"
+      >
+        <div
+          class="text-headline-md font-headline-md font-bold tracking-tight text-primary"
+        >
+          SkillSphere
+        </div>
+        <!-- Desktop Links -->
+        <div class="hidden md:flex gap-8 items-center">
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-label-sm"
+            href="#"
+            >Marketplace</a
+          >
+          <a
+            class="text-primary font-semibold border-b-2 border-primary text-label-sm font-label-sm"
+            href="#"
+            >Explore</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-label-sm"
+            href="#"
+            >Pro Services</a
+          >
+        </div>
+        <!-- Actions -->
+        <div class="flex items-center gap-base">
+          <button
+            class="hidden sm:block text-on-surface-variant hover:text-primary text-label-sm font-label-sm px-4 py-2 transition-all"
+          >
+            Sign In
+          </button>
+          <button
+            class="bg-primary text-on-primary px-6 py-2 rounded-full text-label-sm font-label-sm font-semibold hover:bg-primary-container transition-all active:scale-95 duration-150"
+          >
+            Join as Freelancer
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main class="pt-16">
+      <!-- Hero Section -->
+      <section
+        class="relative min-h-[870px] flex flex-col items-center justify-center text-center px-gutter hero-gradient overflow-hidden"
+      >
+        <!-- Animated Background Asset -->
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div
+            class="inline-flex items-center gap-xs px-4 py-1.5 rounded-full bg-secondary-container/10 border border-secondary/20 mb-lg animate-float"
+          >
+            <span class="material-symbols-outlined text-secondary text-[18px]"
+              >auto_awesome</span
+            >
+            <span class="text-secondary font-label-sm text-label-sm"
+              >AI-Powered Hyperlocal Matching Engine</span
+            >
+          </div>
+          <h1
+            class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-background mb-base"
+          >
+            Connect with <span class="text-primary">Verified</span> Local
+            Freelancers
+          </h1>
+          <p
+            class="text-body-lg font-body-lg text-on-surface-variant mb-lg max-w-2xl"
+          >
+            Skip the global search. Find elite local talent within minutes using
+            our AI precision matching system designed for high-performance
+            businesses.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row gap-base w-full sm:w-auto mb-xl"
+          >
+            <button
+              class="bg-primary text-on-primary px-lg py-md rounded-xl font-headline-md text-headline-md flex items-center justify-center gap-xs shadow-lg hover:shadow-primary/20 transition-all"
+            >
+              Hire Talent
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+            <button
+              class="bg-surface-container-lowest text-primary border border-primary/20 px-lg py-md rounded-xl font-headline-md text-headline-md hover:bg-surface-container-high transition-all"
+            >
+              Find Work
+            </button>
+          </div>
+          <!-- Search Bar Container -->
+          <div
+            class="w-full max-w-5xl glass-card rounded-2xl p-sm shadow-xl flex flex-col md:flex-row items-center gap-xs"
+          >
+            <div
+              class="flex-1 w-full flex items-center px-base border-b md:border-b-0 md:border-r border-outline-variant/30 py-sm"
+            >
+              <span class="material-symbols-outlined text-outline">search</span>
+              <input
+                class="w-full bg-transparent border-none focus:ring-0 text-body-md placeholder:text-outline-variant"
+                placeholder="Skill (e.g. React Native, Copywriting)"
+                type="text"
+              />
+            </div>
+            <div
+              class="flex-1 w-full flex items-center px-base border-b md:border-b-0 md:border-r border-outline-variant/30 py-sm"
+            >
+              <span class="material-symbols-outlined text-outline"
+                >location_on</span
+              >
+              <input
+                class="w-full bg-transparent border-none focus:ring-0 text-body-md placeholder:text-outline-variant"
+                placeholder="Your Neighborhood or City"
+                type="text"
+              />
+            </div>
+            <div class="flex-1 w-full flex items-center px-base py-sm">
+              <span class="material-symbols-outlined text-outline"
+                >category</span
+              >
+              <select
+                class="w-full bg-transparent border-none focus:ring-0 text-body-md text-on-surface-variant appearance-none"
+              >
+                <option>Service Category</option>
+                <option>Development</option>
+                <option>Marketing</option>
+                <option>Creative Arts</option>
+              </select>
+            </div>
+            <button
+              class="w-full md:w-auto bg-primary text-on-primary h-12 px-lg rounded-xl font-semibold hover:bg-primary-container transition-all"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- Stats Section -->
+      <section class="py-xl max-w-container-max mx-auto px-gutter">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+          <div
+            class="glass-card p-lg rounded-2xl text-center border-t-2 border-t-primary shadow-sm hover:translate-y-[-4px] transition-transform"
+          >
+            <div class="text-display-lg font-display-lg text-primary mb-xs">
+              10k+
+            </div>
+            <div class="text-headline-md font-headline-md text-on-surface">
+              Freelancers
+            </div>
+            <p class="text-body-md text-on-surface-variant mt-xs">
+              Curated elite local professionals
+            </p>
+          </div>
+          <div
+            class="glass-card p-lg rounded-2xl text-center border-t-2 border-t-secondary shadow-sm hover:translate-y-[-4px] transition-transform"
+          >
+            <div class="text-display-lg font-display-lg text-secondary mb-xs">
+              98%
+            </div>
+            <div class="text-headline-md font-headline-md text-on-surface">
+              Success Rate
+            </div>
+            <p class="text-body-md text-on-surface-variant mt-xs">
+              Based on 50,000+ local projects
+            </p>
+          </div>
+          <div
+            class="glass-card p-lg rounded-2xl text-center border-t-2 border-t-tertiary shadow-sm hover:translate-y-[-4px] transition-transform"
+          >
+            <div class="text-display-lg font-display-lg text-tertiary mb-xs">
+              Local
+            </div>
+            <div class="text-headline-md font-headline-md text-on-surface">
+              Support
+            </div>
+            <p class="text-body-md text-on-surface-variant mt-xs">
+              24/7 dedicated regional assistance
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Popular Categories -->
+      <section class="py-xl bg-surface-container-lowest">
+        <div class="max-w-container-max mx-auto px-gutter">
+          <div
+            class="flex flex-col md:flex-row justify-between items-end mb-lg gap-base"
+          >
+            <div>
+              <h2
+                class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-background"
+              >
+                Explore Top Services
+              </h2>
+              <p class="text-body-lg font-body-lg text-on-surface-variant">
+                The most in-demand skills in your local economy.
+              </p>
+            </div>
+            <a
+              class="text-primary font-semibold flex items-center gap-xs group"
+              href="#"
+            >
+              View All Categories
+              <span
+                class="material-symbols-outlined group-hover:translate-x-1 transition-transform"
+                >trending_flat</span
+              >
+            </a>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-md">
+            <!-- Category Card 1 -->
+            <div
+              class="group bg-surface-container-low p-lg rounded-2xl border border-outline-variant/30 hover:border-primary/50 transition-all cursor-pointer"
+            >
+              <div
+                class="w-14 h-14 rounded-xl bg-primary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform"
+              >
+                <span class="material-symbols-outlined text-primary text-[32px]"
+                  >code</span
+                >
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-background mb-xs"
+              >
+                Web Dev
+              </h3>
+              <p class="text-label-sm font-label-sm text-on-surface-variant">
+                1.2k+ Experts
+              </p>
+            </div>
+            <!-- Category Card 2 -->
+            <div
+              class="group bg-surface-container-low p-lg rounded-2xl border border-outline-variant/30 hover:border-primary/50 transition-all cursor-pointer"
+            >
+              <div
+                class="w-14 h-14 rounded-xl bg-secondary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform"
+              >
+                <span
+                  class="material-symbols-outlined text-secondary text-[32px]"
+                  >palette</span
+                >
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-background mb-xs"
+              >
+                Design
+              </h3>
+              <p class="text-label-sm font-label-sm text-on-surface-variant">
+                850+ Experts
+              </p>
+            </div>
+            <!-- Category Card 3 -->
+            <div
+              class="group bg-surface-container-low p-lg rounded-2xl border border-outline-variant/30 hover:border-primary/50 transition-all cursor-pointer"
+            >
+              <div
+                class="w-14 h-14 rounded-xl bg-tertiary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform"
+              >
+                <span
+                  class="material-symbols-outlined text-tertiary text-[32px]"
+                  >trending_up</span
+                >
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-background mb-xs"
+              >
+                Marketing
+              </h3>
+              <p class="text-label-sm font-label-sm text-on-surface-variant">
+                640+ Experts
+              </p>
+            </div>
+            <!-- Category Card 4 -->
+            <div
+              class="group bg-surface-container-low p-lg rounded-2xl border border-outline-variant/30 hover:border-primary/50 transition-all cursor-pointer"
+            >
+              <div
+                class="w-14 h-14 rounded-xl bg-primary-fixed flex items-center justify-center mb-md group-hover:scale-110 transition-transform"
+              >
+                <span class="material-symbols-outlined text-primary text-[32px]"
+                  >video_library</span
+                >
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-background mb-xs"
+              >
+                Video Edit
+              </h3>
+              <p class="text-label-sm font-label-sm text-on-surface-variant">
+                420+ Experts
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Featured Freelancers -->
+      <section
+        class="py-xl max-w-container-max mx-auto px-gutter overflow-hidden"
+      >
+        <h2
+          class="text-headline-md font-headline-md text-on-surface-variant uppercase tracking-widest text-center mb-lg"
+        >
+          Featured Regional Talent
+        </h2>
+        <div class="flex gap-md overflow-x-auto pb-lg snap-x scrollbar-hide">
+          <!-- Profile Card 1 -->
+          <div
+            class="flex-none w-80 snap-start glass-card rounded-2xl overflow-hidden group shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="h-48 relative">
+              <img
+                class="w-full h-full object-cover"
+                data-alt="Professional freelance software engineer with a modern home office setup, soft warm lighting, wearing casual professional attire, with high-quality camera focus on their facial expression which is friendly and confident. The background has subtle depth with technical books and a large monitor displaying clean code snippets in an indigo-colored IDE."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuADzmyLOos6AL-kpWQY7NWpBzk5wb00vWyVXMhOKi3Cw4nXPlEBH9EiQA8nvJiCowpM-7MjCXNb9sXN7KO9umLpIFKcd2zsh8aoVIn-XZUjyIG3GCb03bBguEdjqUBzIztqQJnu2TGq6YZmlzzuxwHrHRhgWjdxWCw6K5GJ10yN3N4QD_gLSo0HOci6h2Mi_DRlfpJ54tFMiO4yPzc9Wxr1L6d6V6PqeOBZEbagVhPe3GGSD4xS-GvorybaattMq8YyReyaouV-4lBI"
+              />
+              <div
+                class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-xs"
+              >
+                <span
+                  class="material-symbols-outlined text-yellow-500 text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >star</span
+                >
+                4.9
+              </div>
+            </div>
+            <div class="p-base">
+              <h4 class="text-headline-md font-headline-md text-on-background">
+                Alex Rivera
+              </h4>
+              <p class="text-body-md text-primary font-semibold">
+                Full Stack Developer
+              </p>
+              <div
+                class="flex items-center gap-xs text-on-surface-variant text-label-sm mt-xs"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >location_on</span
+                >
+                Downtown District
+              </div>
+              <div class="mt-md flex flex-wrap gap-xs">
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >React</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >Node.js</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Profile Card 2 -->
+          <div
+            class="flex-none w-80 snap-start glass-card rounded-2xl overflow-hidden group shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="h-48 relative">
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A creative graphic designer in a bright, airy studio filled with colorful art prints and natural sunlight from a large window. She is smiling while holding a digital illustration tablet, showing a vibrant UI design project. The aesthetic is clean and creative, featuring a palette of soft teals and warm woods that align with a premium professional workspace."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuasWWQULptca-7pRh6I8I8Xrk8Ym_9u1tjgteMG5rLA7YO0gcy9bJxn-BIBzJUWq1sTyK_PxhVyN5G_9vK6sqhPYPHmbjgc24GFS6xgnd0Utg5OLFoZKsj_hU_yT5vxEyUhKucoaO3ym0TakQYjM9YxQAshUgrgnZV-I1edDr2nDqkTmRkJVgtMX1gfyKYw52EvbQ7o96sZ0Pqs-KRwc37HLjNgGlk6Dcv0qGyA60voymh4o17Vsx1Q_3KtHw-35wi_J9HS_Gxc1m"
+              />
+              <div
+                class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-xs"
+              >
+                <span
+                  class="material-symbols-outlined text-yellow-500 text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >star</span
+                >
+                5.0
+              </div>
+            </div>
+            <div class="p-base">
+              <h4 class="text-headline-md font-headline-md text-on-background">
+                Sarah Chen
+              </h4>
+              <p class="text-body-md text-primary font-semibold">
+                Brand Identity Designer
+              </p>
+              <div
+                class="flex items-center gap-xs text-on-surface-variant text-label-sm mt-xs"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >location_on</span
+                >
+                North Heights
+              </div>
+              <div class="mt-md flex flex-wrap gap-xs">
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >Figma</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >Logo Design</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Profile Card 3 -->
+          <div
+            class="flex-none w-80 snap-start glass-card rounded-2xl overflow-hidden group shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="h-48 relative">
+              <img
+                class="w-full h-full object-cover"
+                data-alt="An expert digital marketing consultant presenting analytics on a large glass whiteboard in a modern corporate meeting room. The lighting is crisp and professional, emphasizing a high-tech business atmosphere. The color scheme is dominated by cool blues and grays, representing trust and data-driven expertise in the hyperlocal freelance industry."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuALMF5e4T0ZdVSjMjjbB287vcGT1Uv7dmwhaQz3vaReGWaad1sKHiCx5YeMXWPiZVJbAqmmO6B0RGWIt6xn1_t5p5lLZj_HzMaWoL2LPmwaqUBm9kuH1OmTwM2vEKwjOYtF4minJjuaQajnvqD7T8tFEF97WVxsgNY_quOEto3yiPBFDU7rMo7skAAjR8woGpdrZMvLO8VhiFsuQnSrIWjSR7AzlnenEd0cVSrqtD3SCFiQlglLePx-XOu3efNBe7X_tHnbSEZLwurN"
+              />
+              <div
+                class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-xs"
+              >
+                <span
+                  class="material-symbols-outlined text-yellow-500 text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >star</span
+                >
+                4.8
+              </div>
+            </div>
+            <div class="p-base">
+              <h4 class="text-headline-md font-headline-md text-on-background">
+                Jordan Miller
+              </h4>
+              <p class="text-body-md text-primary font-semibold">
+                SEO &amp; Ad Expert
+              </p>
+              <div
+                class="flex items-center gap-xs text-on-surface-variant text-label-sm mt-xs"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >location_on</span
+                >
+                West Waterfront
+              </div>
+              <div class="mt-md flex flex-wrap gap-xs">
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >Google Ads</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >SEO</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Profile Card 4 -->
+          <div
+            class="flex-none w-80 snap-start glass-card rounded-2xl overflow-hidden group shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="h-48 relative">
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A focused female mobile app developer working in a minimalist, tech-focused coworking space. She is checking her work on multiple high-end smartphones. The lighting is sophisticated, with a mix of natural light and soft LED accents. The environment reflects high-performance software engineering within a collaborative local community."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOv5rUQx1Ltk1PGzpSdXY0i8Oq_eYRCsq4mV9pcHyvuBz93Y9gfTpD7dbq9_n43uqm8684RyIP-nig5M_gPf0diw456UzB27ytcMc417-KIa-xXfvwtPEoD6X5wdRCSIKB8cEjvw9sKuj54NDrLEuLzKw9SvuUnr0o5YusaiMXBSH1r2FxRrWWVdBtjSoOeXTucjBuMfh9GeYoYKprYAwiA7EAdaL6oxfWU1J9FuA8cBUpPQszCzkz7LDlc30mcoMJQsVHPFT4dWCi"
+              />
+              <div
+                class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-xs"
+              >
+                <span
+                  class="material-symbols-outlined text-yellow-500 text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >star</span
+                >
+                5.0
+              </div>
+            </div>
+            <div class="p-base">
+              <h4 class="text-headline-md font-headline-md text-on-background">
+                Elena Petrova
+              </h4>
+              <p class="text-body-md text-primary font-semibold">
+                Mobile UI Specialist
+              </p>
+              <div
+                class="flex items-center gap-xs text-on-surface-variant text-label-sm mt-xs"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >location_on</span
+                >
+                South Park
+              </div>
+              <div class="mt-md flex flex-wrap gap-xs">
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >SwiftUI</span
+                >
+                <span
+                  class="px-2 py-1 bg-surface-container-high rounded text-label-sm"
+                  >Kotlin</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- AI Matching Explanation -->
+      <section class="py-xl bg-surface-container overflow-hidden">
+        <div
+          class="max-w-container-max mx-auto px-gutter grid grid-cols-1 lg:grid-cols-2 gap-xl items-center"
+        >
+          <div class="relative order-2 lg:order-1">
+            <div
+              class="aspect-square glass-card rounded-3xl p-lg relative overflow-hidden flex items-center justify-center"
+            >
+              <div class="relative z-10 w-full max-w-xs space-y-md">
+                <div
+                  class="bg-surface/90 p-md rounded-xl shadow-lg border border-primary/20 translate-x-[-20%]"
+                >
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+                    >
+                      <span
+                        class="material-symbols-outlined text-on-primary text-[16px]"
+                        >psychology</span
+                      >
+                    </div>
+                    <div class="flex-1">
+                      <div class="h-2 w-24 bg-primary/20 rounded mb-1"></div>
+                      <div class="h-1.5 w-16 bg-primary/10 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="bg-surface/90 p-md rounded-xl shadow-lg border border-secondary/20 translate-x-[20%]"
+                >
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center"
+                    >
+                      <span
+                        class="material-symbols-outlined text-on-secondary text-[16px]"
+                        >location_searching</span
+                      >
+                    </div>
+                    <div class="flex-1">
+                      <div class="h-2 w-20 bg-secondary/20 rounded mb-1"></div>
+                      <div class="h-1.5 w-28 bg-secondary/10 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="bg-surface/90 p-md rounded-xl shadow-lg border border-tertiary/20 translate-x-[-10%]"
+                >
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center"
+                    >
+                      <span
+                        class="material-symbols-outlined text-on-tertiary text-[16px]"
+                        >handshake</span
+                      >
+                    </div>
+                    <div class="flex-1">
+                      <div class="h-2 w-32 bg-tertiary/20 rounded mb-1"></div>
+                      <div class="h-1.5 w-20 bg-tertiary/10 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2">
+            <h2
+              class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-background mb-base"
+            >
+              How Hyperlocal AI Works
+            </h2>
+            <p class="text-body-lg font-body-lg text-on-surface-variant mb-lg">
+              Our proprietary neural engine doesn't just look at keywords—it
+              understands local market dynamics and proximity to find you the
+              perfect collaborator.
+            </p>
+            <div class="space-y-md">
+              <div class="flex gap-md">
+                <div
+                  class="w-12 h-12 flex-none bg-primary-container rounded-xl flex items-center justify-center"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-primary-container"
+                    >near_me</span
+                  >
+                </div>
+                <div>
+                  <h4
+                    class="text-headline-md font-headline-md text-on-background"
+                  >
+                    Proximity Analysis
+                  </h4>
+                  <p class="text-body-md text-on-surface-variant">
+                    Matches based on travel time and regional presence for
+                    easier physical meetings.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div
+                  class="w-12 h-12 flex-none bg-secondary-container rounded-xl flex items-center justify-center"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-secondary-container"
+                    >verified_user</span
+                  >
+                </div>
+                <div>
+                  <h4
+                    class="text-headline-md font-headline-md text-on-background"
+                  >
+                    Verification Layer
+                  </h4>
+                  <p class="text-body-md text-on-surface-variant">
+                    Every freelancer is vetted through a rigorous identity and
+                    skill authentication process.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-md">
+                <div
+                  class="w-12 h-12 flex-none bg-tertiary-container rounded-xl flex items-center justify-center"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-tertiary-container"
+                    >rocket_launch</span
+                  >
+                </div>
+                <div>
+                  <h4
+                    class="text-headline-md font-headline-md text-on-background"
+                  >
+                    Instant Connection
+                  </h4>
+                  <p class="text-body-md text-on-surface-variant">
+                    Real-time collaboration tools ready to go the moment a match
+                    is confirmed.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Testimonials -->
+      <section class="py-xl max-w-container-max mx-auto px-gutter">
+        <h2
+          class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-background text-center mb-xl"
+        >
+          What Businesses Say
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+          <!-- Testimonial 1 -->
+          <div class="glass-card p-lg rounded-2xl flex flex-col gap-md">
+            <div class="flex items-center gap-base">
+              <div class="w-12 h-12 rounded-full overflow-hidden">
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="Headshot of a mid-40s male CEO of a local tech startup, looking professional and satisfied. Soft studio lighting on a neutral background, highlighting his friendly facial features. The visual style is polished and high-end, representing business leadership and trust."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEcfWKo0onkHJQgl_0E5tuF7ZfNo-L4GurJSmWHtGuPK4_zZit5Xdgguhq1Ns9dX56LOxXvicFZVboWvxXSJh5NCU2PJtmt899ybApUJO3HT5j5aT4onV5nG7uRO8_ib1B5WJU6-HypphMaz7WxuwNCOMk1R8ZzFKWxqEnp85hK8obfxZRLNzzYR4L1jv0UKVJ3aDJW98-9DWdA4cEgWOLu-9TUdO2k2AWz4bOM7TEJyGga5-vZnJyo1smwdPJDm373DZpr1xbZw1w"
+                />
+              </div>
+              <div>
+                <div class="font-headline-md text-on-background">
+                  Jameson Webb
+                </div>
+                <div class="text-label-sm text-on-surface-variant">
+                  CEO, UrbanSpark
+                </div>
+              </div>
+            </div>
+            <p class="text-body-md italic text-on-surface-variant">
+              "Finding a developer in my own city who actually understands our
+              local client base was impossible before SkillSphere. The AI
+              matching was spot on."
+            </p>
+            <div class="flex text-yellow-500">
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+            </div>
+          </div>
+          <!-- Testimonial 2 -->
+          <div class="glass-card p-lg rounded-2xl flex flex-col gap-md">
+            <div class="flex items-center gap-base">
+              <div class="w-12 h-12 rounded-full overflow-hidden">
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="Portrait of a young female entrepreneur in her creative studio, with a blurred background of architectural sketches and blueprints. She looks happy and accomplished, illuminated by warm, natural light. The photograph conveys a sense of modern professional success and creative freedom."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3Jhd_tdA3VSCsR-B8L_deMwPnQMeDZJUEgTB8MB3NTcWl-z8shfm1daYIsrToMYJNqQHC5pvpyiXUI0o0LZvN7sdVOqQ73aCYfD0HaopNAywuQkL5vn54K_5PrvnghTqD-M05O5HbIlDvcRuFXzOpfd-q62cRNBj1mZmkErXnGYghjumCdqt1oUG4v0to0YWOSkmyuuQdXbBHtx-LPKZ-OyfYbMM-gzHnJB97d6TZc9r9VekUoDeQHBYWdJV8jidLDwZsjp2Bczc3"
+                />
+              </div>
+              <div>
+                <div class="font-headline-md text-on-background">
+                  Sarah Thorne
+                </div>
+                <div class="text-label-sm text-on-surface-variant">
+                  Founder, Thorne Studio
+                </div>
+              </div>
+            </div>
+            <p class="text-body-md italic text-on-surface-variant">
+              "The quality of freelancers here is unlike any other platform.
+              Being able to meet my designer for coffee locally changed our
+              workflow entirely."
+            </p>
+            <div class="flex text-yellow-500">
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+            </div>
+          </div>
+          <!-- Testimonial 3 -->
+          <div class="glass-card p-lg rounded-2xl flex flex-col gap-md">
+            <div class="flex items-center gap-base">
+              <div class="w-12 h-12 rounded-full overflow-hidden">
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="Close-up portrait of a mature male small business owner with a friendly and trustworthy expression. He is photographed in a well-lit cafe environment with soft bokeh in the background. The aesthetic is clean and approachable, emphasizing the community-focused nature of the SkillSphere platform."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXAt2do0pFThkG28wb_OBlXwZupJnlsila030byOu7js-G4sdtwbqwlU86vW5seNEYNJCPTWszuAOj4HSEjBJm9uoUmb2502E8AoLEakj4CedbYZxATuT0No8PoA1muvDk3zkWPxHIbt6zNHNNKf6hhglFCGllFGtsK8vnDdCk0dNIfMadt0NA7NuxWusudZ06y1k05Iefc03u56fKz0fZFT_7jK2vNG1IJaDmn5-YmQNYKyLxXplGh8vV3nVb8gZHbHX1HCeRefRc"
+                />
+              </div>
+              <div>
+                <div class="font-headline-md text-on-background">
+                  Marcus Gao
+                </div>
+                <div class="text-label-sm text-on-surface-variant">
+                  Marketing Director, Peak Co.
+                </div>
+              </div>
+            </div>
+            <p class="text-body-md italic text-on-surface-variant">
+              "SkillSphere makes hiring local feel like it has the power of a
+              global enterprise. Fast, secure, and incredibly efficient."
+            </p>
+            <div class="flex text-yellow-500">
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star_half</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Final CTA -->
+      <section class="py-xl mb-xl">
+        <div class="max-w-4xl mx-auto px-gutter">
+          <div
+            class="bg-primary-container rounded-[2rem] p-lg md:p-xl text-center text-on-primary-container relative overflow-hidden shadow-2xl"
+          >
+            <div
+              class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent)]"
+            ></div>
+            <h2
+              class="text-display-lg-mobile md:text-display-lg font-display-lg mb-base relative z-10"
+            >
+              Ready to boost your local project?
+            </h2>
+            <p class="text-body-lg font-body-lg mb-lg opacity-90 relative z-10">
+              Join thousands of businesses and freelancers building the future
+              of work in their own backyard.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row gap-base justify-center relative z-10"
+            >
+              <button
+                class="bg-surface-container-lowest text-primary px-xl py-md rounded-xl font-headline-md text-headline-md hover:bg-surface-bright transition-all active:scale-95"
+              >
+                Get Started Now
+              </button>
+              <button
+                class="bg-primary/20 border border-on-primary-container/20 text-on-primary-container px-xl py-md rounded-xl font-headline-md text-headline-md hover:bg-primary/30 transition-all"
+              >
+                Talk to Sales
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="w-full py-xl mt-auto bg-surface-container-lowest border-t border-outline-variant/50"
+    >
+      <div
+        class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-base"
+      >
+        <div class="text-headline-md font-headline-md text-primary font-bold">
+          SkillSphere
+        </div>
+        <div class="flex flex-wrap justify-center gap-lg">
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-body-md font-body-md"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-body-md font-body-md"
+            href="#"
+            >Terms of Service</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-body-md font-body-md"
+            href="#"
+            >Cookie Settings</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary underline decoration-primary transition-all text-body-md font-body-md"
+            href="#"
+            >Contact Us</a
+          >
+        </div>
+        <p class="text-on-surface-variant text-label-sm font-label-sm">
+          © 2024 SkillSphere Ecosystem. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script>
+      // Simple micro-interaction for navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 20) {
+          nav.classList.add("shadow-md");
+          nav.classList.remove("shadow-sm");
+        } else {
+          nav.classList.add("shadow-sm");
+          nav.classList.remove("shadow-md");
+        }
+      });
+    </script>
+  </body>
+</html>

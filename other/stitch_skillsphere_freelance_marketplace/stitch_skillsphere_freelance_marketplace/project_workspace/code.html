@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkillSphere Project Workspace</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e5eeff;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #dce9ff;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#fffbff",
+                        "on-secondary-fixed": "#07006c",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary": "#003853",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#dce9ff",
+                        "on-primary-fixed-variant": "#173bab",
+                        "surface-container": "#e5eeff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-bright": "#f8f9ff",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed": "#001e2f",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "surface": "#f8f9ff",
+                        "outline-variant": "#c4c5d5",
+                        "inverse-surface": "#213145",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#00288e",
+                        "secondary": "#4648d4",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#444653",
+                        "primary-fixed": "#dde1ff",
+                        "surface-tint": "#3755c3",
+                        "outline": "#757684",
+                        "tertiary-container": "#005074",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-primary-fixed": "#001453",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "secondary-container": "#6063ee",
+                        "primary-container": "#1e40af",
+                        "on-primary-container": "#a8b8ff",
+                        "on-tertiary-container": "#68c4ff",
+                        "inverse-primary": "#b8c4ff",
+                        "on-surface": "#0b1c30",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "secondary-fixed": "#e1e0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "64px",
+                        "gutter": "24px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- SideNavBar Anchor -->
+<nav class="h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col bg-surface-container-lowest border-r border-outline-variant/20 shadow-md p-4 gap-2 z-50">
+<div class="mb-lg px-2">
+<h1 class="text-body-lg font-headline-md text-primary tracking-tight">SkillSphere</h1>
+<p class="text-label-sm text-on-surface-variant mt-1">Freelancer Portal</p>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container rounded-lg font-semibold transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="work" style="font-variation-settings: 'FILL' 1;">work</span>
+<span class="text-label-sm font-label-sm">Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-label-sm font-label-sm">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-label-sm font-label-sm">Finances</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-label-sm font-label-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-sm font-label-sm">Settings</span>
+</a>
+</div>
+<div class="mt-auto border-t border-outline-variant/10 pt-4 flex flex-col gap-1">
+<button class="bg-primary text-on-primary w-full py-3 rounded-xl font-semibold mb-4 hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20">
+                Post a Gig
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-sm font-label-sm">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-error hover:bg-error-container/10 transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-label-sm font-label-sm">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar Anchor -->
+<header class="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 px-gutter flex justify-between items-center h-16">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 hover:bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h2 class="text-headline-md font-headline-md text-primary">Workspace</h2>
+</div>
+<div class="flex items-center gap-base">
+<div class="hidden sm:flex items-center bg-surface-container px-4 py-2 rounded-full border border-outline-variant/30 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-48 lg:w-64" placeholder="Search workspace..." type="text"/>
+</div>
+<div class="flex items-center gap-1">
+<button class="hover:bg-surface-container-high rounded-full p-2 text-on-surface-variant transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="flex items-center gap-2 hover:bg-surface-container-high rounded-full py-1 pl-1 pr-3 text-on-surface-variant transition-all border border-transparent hover:border-outline-variant/30">
+<img class="w-8 h-8 rounded-full object-cover shadow-sm" data-alt="A clean, professional headshot of a creative freelancer with a friendly expression. The lighting is bright and airy, reflecting a modern SaaS light-mode aesthetic. The background is a soft, blurred studio space with cool blue tones, matching the SkillSphere brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzHn99puG0wyGZUg8bF90yeHPoz5ElksO-leOtzT1XztkSDBgmfhZ9KWEr__zC_JjlB9ySkjqatEqz6fBEnJGbDsTRMDHFVps1YlXeFt2vW9GeA9Dag4JEaOeOokz2HUv5vh4ONaSXQe2Om_Sx-YkqJT1xs0ywdmk8QZXZLzkk_rNYERdkeQUMk97cPUKLLSKlQFw3C0IIP9aCHSdfWidVl0jxxVxuohEJlmidt-ELUj7nPJx5PU3yPfhBKCVvgghfPzGZkG7C-DCm"/>
+<span class="text-label-sm font-semibold hidden sm:inline">Alex Rivera</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Dashboard Canvas -->
+<div class="p-gutter lg:p-lg max-w-container-max mx-auto w-full flex flex-col gap-lg">
+<!-- Project Header & Progress Summary -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-8 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-xs text-secondary font-semibold">
+<span class="material-symbols-outlined text-[18px]" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-label-sm uppercase tracking-widest">Active Project</span>
+</div>
+<h1 class="text-display-lg-mobile lg:text-display-lg font-display-lg text-on-background mb-4">HyperLocal Grocery App</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">
+                        Building a sustainable delivery network for independent local vendors. Currently in the Development phase with 4 major features in progress.
+                    </p>
+</div>
+<div class="lg:col-span-4 glass-card rounded-xl p-md flex flex-col items-center justify-center text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary"></div>
+<div class="relative w-32 h-32 flex items-center justify-center mb-4">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-container-highest" cx="64" cy="64" fill="none" r="56" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary transition-all duration-1000 ease-out" cx="64" cy="64" fill="none" r="56" stroke="currentColor" stroke-dasharray="351.85" stroke-dashoffset="87.96" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-headline-md font-bold text-primary">75%</span>
+</div>
+</div>
+<h3 class="font-bold text-on-surface">Overall Progress</h3>
+<p class="text-label-sm text-on-surface-variant mt-1">Milestone 3 of 4 Completed</p>
+</div>
+</section>
+<!-- Milestone Tracker -->
+<section class="glass-card rounded-xl p-md">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="text-headline-md font-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="route">route</span>
+                        Milestone Tracker
+                    </h3>
+<button class="text-primary font-semibold text-label-sm flex items-center gap-1 hover:underline">
+                        View Details <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="relative flex flex-col md:flex-row justify-between items-start md:items-center gap-gutter px-4">
+<!-- Progress Line (Background) -->
+<div class="absolute top-1/2 left-0 w-full h-1 bg-surface-container hidden md:block -translate-y-1/2 z-0"></div>
+<!-- Progress Line (Active) -->
+<div class="absolute top-1/2 left-0 w-3/4 h-1 bg-primary hidden md:block -translate-y-1/2 z-0"></div>
+<!-- Step 1: Discovery -->
+<div class="relative z-10 flex flex-row md:flex-col items-center gap-4 md:gap-3 bg-white md:bg-transparent w-full md:w-auto p-3 md:p-0 rounded-lg shadow-sm md:shadow-none">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+</div>
+<div class="text-left md:text-center">
+<p class="font-bold text-on-surface">Discovery</p>
+<span class="text-[10px] bg-primary-container/20 text-primary px-2 py-0.5 rounded-full uppercase font-bold">Done</span>
+</div>
+</div>
+<!-- Step 2: Design -->
+<div class="relative z-10 flex flex-row md:flex-col items-center gap-4 md:gap-3 bg-white md:bg-transparent w-full md:w-auto p-3 md:p-0 rounded-lg shadow-sm md:shadow-none">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined" data-icon="palette" style="font-variation-settings: 'FILL' 1;">palette</span>
+</div>
+<div class="text-left md:text-center">
+<p class="font-bold text-on-surface">Design</p>
+<span class="text-[10px] bg-primary-container/20 text-primary px-2 py-0.5 rounded-full uppercase font-bold">Done</span>
+</div>
+</div>
+<!-- Step 3: Development -->
+<div class="relative z-10 flex flex-row md:flex-col items-center gap-4 md:gap-3 bg-white md:bg-transparent w-full md:w-auto p-3 md:p-0 rounded-lg shadow-sm md:shadow-none">
+<div class="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-md ring-4 ring-secondary/20">
+<span class="material-symbols-outlined" data-icon="code" style="font-variation-settings: 'FILL' 1;">code</span>
+</div>
+<div class="text-left md:text-center">
+<p class="font-bold text-primary">Development</p>
+<span class="text-[10px] bg-secondary text-on-secondary px-2 py-0.5 rounded-full uppercase font-bold">In Progress</span>
+</div>
+</div>
+<!-- Step 4: Review -->
+<div class="relative z-10 flex flex-row md:flex-col items-center gap-4 md:gap-3 bg-white md:bg-transparent w-full md:w-auto p-3 md:p-0 rounded-lg shadow-sm md:shadow-none opacity-50">
+<div class="w-12 h-12 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+</div>
+<div class="text-left md:text-center">
+<p class="font-bold text-on-surface-variant">Review</p>
+<span class="text-[10px] bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded-full uppercase font-bold">Waiting</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Layout: Tasks, Files, Timeline -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Task Board -->
+<div class="lg:col-span-7 glass-card rounded-xl overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-lowest/50">
+<h3 class="font-bold text-headline-md text-on-background">Task Board</h3>
+<button class="bg-primary-container/20 text-primary hover:bg-primary-container/40 p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant/10 text-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="px-md py-4 font-semibold">Task Name</th>
+<th class="px-md py-4 font-semibold">Assignee</th>
+<th class="px-md py-4 font-semibold">Status</th>
+<th class="px-md py-4 font-semibold">Due</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-md py-4 font-medium text-on-surface">API Integration Layer</td>
+<td class="px-md py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-dim flex items-center justify-center text-[10px] font-bold">JB</div>
+<span class="text-label-sm">Josh B.</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="px-2 py-1 bg-surface-container-high text-on-surface-variant text-[11px] font-bold rounded-full">In Testing</span>
+</td>
+<td class="px-md py-4 text-label-sm text-on-surface-variant">Oct 24</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-md py-4 font-medium text-on-surface">Payment Gateway Hook</td>
+<td class="px-md py-4">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full" data-alt="A small circular avatar icon of a software engineer, clean lighting, high resolution studio photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCZ4_82Tm6Io6KDj4DggBdq-0hJDIp61rrYVdP2FzAuB89Z07QkU7cR2YFm9DvE17AZp-3aKHTrYjOyXVx8MLHarZk5sP8RhV_1hfLyMKl2oiqQmCT1R8Jpk5UWlkGVl5XMfYcaxjpbv29JaejkzZee7FFEkLIj7PRuFNUawG0uHD-UbQdBLbegNh8Kct-kBWuEIrtTEUK9sp7SASsLk_I9-tThVX67GQSBkgBYnF6YDKJflsVJv5ySr8JIGXWUMWi0odAGgfrdTVp"/>
+<span class="text-label-sm">Sarah L.</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="px-2 py-1 bg-secondary text-on-secondary text-[11px] font-bold rounded-full">Active</span>
+</td>
+<td class="px-md py-4 text-label-sm text-on-surface-variant">Oct 28</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-md py-4 font-medium text-on-surface">Refactor Redux Store</td>
+<td class="px-md py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed-dim text-primary text-[10px] font-bold flex items-center justify-center">AR</div>
+<span class="text-label-sm">Alex R.</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="px-2 py-1 bg-primary text-on-primary text-[11px] font-bold rounded-full">Urgent</span>
+</td>
+<td class="px-md py-4 text-label-sm text-error font-semibold">Today</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- File Sharing -->
+<div class="lg:col-span-5 glass-card rounded-xl p-md flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-bold text-headline-md text-on-background">Shared Assets</h3>
+<span class="text-label-sm text-on-surface-variant">12 Files</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- PDF -->
+<div class="p-3 rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-all group flex flex-col gap-2">
+<div class="w-full aspect-square bg-surface-container rounded-md flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-[40px]" data-icon="picture_as_pdf" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div class="flex justify-between items-start">
+<div class="overflow-hidden">
+<p class="text-label-sm font-bold truncate">Contract_v1.pdf</p>
+<p class="text-[10px] text-on-surface-variant">2.4 MB</p>
+</div>
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform" data-icon="download">download</button>
+</div>
+</div>
+<!-- Image -->
+<div class="p-3 rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-all group flex flex-col gap-2">
+<div class="w-full aspect-square bg-surface-container rounded-md overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean UI design mockup showing the landing page of a grocery delivery application. Soft pastel colors, professional typography, and high-quality food photography icons are visible." src="https://lh3.googleusercontent.com/aida-public/AB6AXuConVmA7_MTDLapYzxH8SHJ5OHIljR73UKDshRadGkpVE8Aw-5RvO_B4i-393HIoqdzBwmm8wvmDCR11ilQrOs1XVZoTsuwHEjlbKHI7EK0AsUo8pQbSxWB9tUxEPxae-NtOicBWt5JuOAdrhI7-dPUnSNT6CMbSZ5rC-CnqwCTXVbbJmEtC4lr8QKWFSvf0vQzCWImt8NtheEecm27pp5iyfrqRG-A-ZblJyuYPNigdkithPXaXinT8J4lO_I1l9I2q8ANSaVMzDSw"/>
+</div>
+<div class="flex justify-between items-start">
+<div class="overflow-hidden">
+<p class="text-label-sm font-bold truncate">Landing_Mockup.png</p>
+<p class="text-[10px] text-on-surface-variant">15.8 MB</p>
+</div>
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform" data-icon="download">download</button>
+</div>
+</div>
+</div>
+<button class="mt-lg w-full py-2 border-2 border-dashed border-outline-variant hover:border-primary hover:bg-primary/5 rounded-xl transition-all text-on-surface-variant text-label-sm font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="upload">upload</span>
+                        Drop more files here
+                    </button>
+</div>
+<!-- Activity Timeline -->
+<div class="lg:col-span-12 glass-card rounded-xl p-md">
+<h3 class="font-bold text-headline-md text-on-background mb-lg">Recent Activity</h3>
+<div class="space-y-6 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container">
+<!-- Activity 1 -->
+<div class="relative pl-10 flex items-start gap-4">
+<div class="absolute left-0 w-6 h-6 rounded-full bg-primary ring-4 ring-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-primary" data-icon="cloud_upload" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+</div>
+<div>
+<p class="text-body-md"><span class="font-bold text-primary">Alex Rivera</span> uploaded <span class="font-semibold text-on-background">Brand_v2.pdf</span> to Assets</p>
+<span class="text-label-sm text-on-surface-variant">2 hours ago</span>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="relative pl-10 flex items-start gap-4">
+<div class="absolute left-0 w-6 h-6 rounded-full bg-secondary ring-4 ring-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-secondary" data-icon="task_alt" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+</div>
+<div>
+<p class="text-body-md"><span class="font-bold text-on-background">Josh B.</span> marked <span class="font-semibold text-on-background">API Integration</span> as <span class="text-secondary font-bold">In Testing</span></p>
+<span class="text-label-sm text-on-surface-variant">5 hours ago</span>
+</div>
+</div>
+<!-- Activity 3 -->
+<div class="relative pl-10 flex items-start gap-4">
+<div class="absolute left-0 w-6 h-6 rounded-full bg-tertiary-container ring-4 ring-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container" data-icon="chat">chat</span>
+</div>
+<div>
+<p class="text-body-md"><span class="font-bold text-on-background">Sarah L.</span> left a comment: <span class="italic text-on-surface-variant">"Need the final vector logo for the footer."</span></p>
+<span class="text-label-sm text-on-surface-variant">Yesterday at 4:30 PM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Anchor -->
+<footer class="w-full py-xl mt-auto bg-surface-container-lowest border-t border-outline-variant/50">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-base">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="text-headline-md font-headline-md text-primary">SkillSphere</span>
+<p class="text-body-md text-on-surface-variant">© 2024 SkillSphere Ecosystem. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary text-label-sm underline decoration-primary transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary text-label-sm underline decoration-primary transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary text-label-sm underline decoration-primary transition-all" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- FAB (Suppressed on workspace as per rules, but showing contextually for 'Add Task' if desired - following rule 'Only render if primary purpose aligns') -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 md:hidden">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<script>
+        // Micro-interaction for the progress circle
+        document.addEventListener('DOMContentLoaded', () => {
+            const circle = document.querySelector('circle.text-primary');
+            if (circle) {
+                // Initial state was handled by CSS transition, but we can re-trigger on view if needed
+                setTimeout(() => {
+                    circle.style.strokeDashoffset = '87.96'; // 75% of 351.85
+                }, 500);
+            }
+
+            // Simple glass-card hover effect logic
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-2px)';
+                    card.style.transition = 'all 0.3s ease';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body></html>
